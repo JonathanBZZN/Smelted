@@ -1,6 +1,7 @@
 from player import *
 from static_objects import *
 from conifg import *
+from sword import *
 
 pygame.init()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -13,6 +14,7 @@ player2.rect.x = 200
 
 wall = Wall()
 furnace = Furnace()
+Hammer = Hammer()
 collect = CollectionPoint(Iron)
 
 # Init sprite groups
@@ -21,6 +23,7 @@ all_sprites.add(player1)
 all_sprites.add(player2)
 all_sprites.add(furnace)
 all_sprites.add(wall)
+all_sprites.add(Hammer)
 all_sprites.add(collect)
 
 # init game clock

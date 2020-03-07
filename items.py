@@ -21,7 +21,7 @@ class Item(pygame.sprite.Sprite):
 class Iron(Item):
 
     def __init__(self):
-        super(Iron, self).__init__(50, 25, True)
+        super(Iron, self).__init__(50, 25, smeltable=True)
         self.surf = pygame.transform.scale(pygame.image.load("Sprites/ingot.png"), (50, 37))
         self.surf = self.surf.convert()
         self.rect = self.surf.get_rect()
@@ -31,7 +31,7 @@ class Iron(Item):
 class Steel(Item):
 
     def __init__(self):
-        super(Steel, self).__init__(50, 25)
+        super(Steel, self).__init__(50, 25, hammerable=True)
         self.surf = pygame.transform.scale(pygame.image.load("Sprites/hot_steel.png"), (50, 37))
         self.surf = self.surf.convert()
         self.rect = self.surf.get_rect()

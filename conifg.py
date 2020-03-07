@@ -1,5 +1,6 @@
 import pygame
 from items import *
+from sword import *
 
 SCREEN_WIDTH = 1600
 SCREEN_HEIGHT = 900
@@ -22,4 +23,8 @@ PLAYER_2_CONFIG = {
 
 SMELT_RECIPES = {
     Steel: (Iron, 120)
+}
+
+HAMMER_RECIPES = {
+    BasicSword: (Steel, 60)
 }

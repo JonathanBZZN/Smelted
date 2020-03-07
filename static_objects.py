@@ -2,6 +2,7 @@ import pygame
 from items import *
 from conifg import *
 
+
 class StaticObject(pygame.sprite.Sprite):
 
     def __init__(self, x, y, width, height, interactive_border_radius=0):
@@ -41,6 +42,7 @@ class Furnace(StaticObject):
                     # Start smelting
                     self.burn_time = SMELT_RECIPES[recipe][1]
                     self.current_smelt = recipe
+                    break
 
             # Update color
             self.surf.fill((255, 0, 0))
@@ -62,6 +64,37 @@ class Furnace(StaticObject):
                 self.current_smelt = None
                 self.finished = True
                 self.surf.fill((255, 165, 0))
+
+
+class Hammer(StaticObject):
+
+    def __init__(self):
+        super(Hammer, self).__init__(500, 300, 200, 200, 15)
+        self.surf.fill((165, 165, 0))
+        self.grind_time = 0
+        self.current_recipe = None
+
+    def interact(self, player):
+        if self.current_recipe is None and player.inventory is not None and player.inventory.hammerable:
+            # Player has an item which can be hammered
+            for recipe in HAMMER_RECIPES:
+                if isinstance(player.inventory, HAMMER_RECIPES[recipe][0]):
+                    # Start hammering
+                    self.grind_time = HAMMER_RECIPES[recipe][1]
+                    self.current_recipe = recipe
+                    player.inventory = None
+                    self.surf.fill((255, 0, 0))
+                    break
+
+        if self.current_recipe is not None:
+            # Player is hammering
+            if self.grind_time > 0:
+                self.grind_time -= 1
+            elif self.grind_time == 0:
+                # Player finished hammering
+                player.inventory = self.current_recipe()
+                self.current_recipe = None
+                self.surf.fill((165, 165, 0))
 
 
 class CollectionPoint(StaticObject):
