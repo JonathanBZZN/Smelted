@@ -13,7 +13,7 @@ class Player(pygame.sprite.Sprite):
 
         self.position = Vector(50, 50)
 
-    def update(self, pressed):
+    def update(self, pressed, entities):
         x = 0
         y = 0
 
@@ -31,4 +31,18 @@ class Player(pygame.sprite.Sprite):
             # Down pressed
             y += 5
 
-        self.rect.move_ip(x, y)
+        old_x = self.rect.x
+        new_x = self.rect.x + x
+        old_y = self.rect.y
+        new_y = self.rect.y + y
+
+        # Update position
+        self.rect.x = new_x
+        if pygame.sprite.spritecollide(self, entities, False):
+            # Changing x caused collision
+            self.rect.x = old_x
+
+        self.rect.y = new_y
+        if pygame.sprite.spritecollide(self, entities, False):
+            # Changing y caused collision
+            self.rect.y = old_y
