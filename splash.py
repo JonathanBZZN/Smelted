@@ -1,4 +1,5 @@
 import pygame
+import main
 pygame.init()
 
 size = width, height = 1600, 900
@@ -13,7 +14,7 @@ red = 255, 0, 0
 screen = pygame.display.set_mode(size)
 clock = pygame.time.Clock()
 
-menuElements = ["menu_art.png", "menu_art_small_button.png", "sound.png", "no_sound.png", "bg.png"]
+menuElements = ["Sprites/menu_art.png", "Sprites/menu_art_small_button.png", "Sprites/sound.png", "Sprites/no_sound.png", "Sprites/bg.png"]
 
 
 def text_objects(text, color):
@@ -72,8 +73,6 @@ def game_intro():
                 pygame.quit()
                 quit()
 
-        print(click)
-
         if 100 > mouse[0] > 0 and height > mouse[1] > height - 100:
             if (pygame.time.get_ticks() - lastTime > 180):
                 if click[0] == 1:
@@ -91,11 +90,8 @@ def game_intro():
 
 
 def gameplay():
-    infopg = pygame.image.load("tempBG.png")
-    screen.blit(infopg, (0, 0))
-    while True:
-        for event in pygame.event.get():
-            if event.type == pygame.KEYDOWN:
-                pass
+    main.run()
 
-        pygame.display.flip()
+
+if __name__ == "__main__":
+    game_intro()
