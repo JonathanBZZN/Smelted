@@ -7,15 +7,15 @@ done = False
 
 # init player
 player = Player()
-x_change = 0
 
 # init game clock
 clock = pygame.time.Clock()
 
 # game clock
 while not done:
-    # Set screen background
+    # Set screen background and draw player
     screen.fill((255, 255, 255))
+    screen.blit(player.surf, player.rect)
 
     for event in pygame.event.get():
         # Quiting
@@ -27,9 +27,8 @@ while not done:
 
     # Update players
     player.update(pressed)
-    player.draw(screen)
 
-    pygame.display.update()
+    pygame.display.flip()
     clock.tick(60)
 
 # Clean up
