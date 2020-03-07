@@ -6,7 +6,7 @@ import random
 class ScoreBoard(StaticObject):
 
     def __init__(self):
-        super(ScoreBoard, self).__init__(SCREEN_WIDTH - 400, 0, 400, 200)
+        super(ScoreBoard, self).__init__(SCREEN_WIDTH - 400, 0, 400, SCREEN_HEIGHT)
         self.surf.fill((100, 0, 200))
         self.score = 0
         self.order_list = []
