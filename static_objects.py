@@ -71,7 +71,7 @@ class Hammer(StaticObject):
     def __init__(self):
         super(Hammer, self).__init__(500, 300, 200, 200, 15)
         self.surf.fill((165, 165, 0))
-        self.grind_time = 0
+        self.hammer_time = 0
         self.current_recipe = None
 
     def interact(self, player):
@@ -80,7 +80,7 @@ class Hammer(StaticObject):
             for recipe in HAMMER_RECIPES:
                 if isinstance(player.inventory, HAMMER_RECIPES[recipe][0]):
                     # Start hammering
-                    self.grind_time = HAMMER_RECIPES[recipe][1]
+                    self.hammer_time = HAMMER_RECIPES[recipe][1]
                     self.current_recipe = recipe
                     player.inventory = None
                     self.surf.fill((255, 0, 0))
@@ -88,9 +88,9 @@ class Hammer(StaticObject):
 
         if self.current_recipe is not None:
             # Player is hammering
-            if self.grind_time > 0:
-                self.grind_time -= 1
-            elif self.grind_time == 0:
+            if self.hammer_time > 0:
+                self.hammer_time -= 1
+            elif self.hammer_time == 0:
                 # Player finished hammering
                 player.inventory = self.current_recipe()
                 self.current_recipe = None
