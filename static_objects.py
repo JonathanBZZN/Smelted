@@ -193,9 +193,17 @@ class CollectionPoint(StaticObject):
         self.surf.set_colorkey((0, 255, 0), RLEACCEL)
         self.output = output
 
+        # Set printing
+        self.print_inventory = True
+        self.print_object = output()
+        self.print_object.update(self.rect.x, self.rect.y, self.surf.get_height(), self.surf.get_width())
+
     def interact(self, player):
         if player.inventory is None:
             player.inventory = self.output()
+
+    def print(self, screen):
+        screen.blit(self.print_object.surf, self.print_object.rect)
 
 
 class Bin(StaticObject):
