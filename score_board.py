@@ -67,11 +67,35 @@ class ScoreBoard(StaticObject):
             if y > self.surf.get_height() - 50:
                 break
             # Else print item
-            item = item.print_item
-            item.update(self.rect.x - (self.surf.get_width() / 2) + 50, y, self.surf.get_height(), self.surf.get_width())
-            screen.blit(item.surf, item.rect)
+            item_p = item.print_item
+            item_p.update(self.rect.x - (self.surf.get_width() / 2) + 50, y, self.surf.get_height(), self.surf.get_width())
+            screen.blit(item_p.surf, item_p.rect)
 
             # Print time remaining
+            time_percentage = item.time / item.start_time
+            bar_pos = (item_p.rect.x + item_p.surf.get_width() + 25, y - item_p.surf.get_width() / 2)
+            bar_size = (200, 20)
+            border_color = (0, 0, 0)
+            DrawBar(bar_pos, bar_size, border_color, time_percentage, screen)
+
+
+def DrawBar(pos, size, border_c, progress, screen):
+    # Set the bar color
+    bar_c = (0, 128, 0)
+    if progress < 0.1:
+        bar_c = (216, 0, 0)
+    elif progress < 0.25:
+        bar_c = (255, 0, 0)
+    elif progress < 0.5:
+        bar_c = (255, 69, 0)
+    elif progress < 0.75:
+        bar_c = (128, 128, 0)
+
+    # Draw the progess bar
+    pygame.draw.rect(screen, border_c, (*pos, *size), 5)
+    inner_pos = (pos[0]+3, pos[1]+3)
+    inner_size = ((size[0]-6) * progress, size[1]-6)
+    pygame.draw.rect(screen, bar_c, (*inner_pos, *inner_size))
 
 
 class EndPoint(StaticObject):
