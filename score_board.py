@@ -78,10 +78,12 @@ class ScoreBoard(StaticObject):
 class EndPoint(StaticObject):
 
     def __init__(self, score_board):
-        super(EndPoint, self).__init__(400, 300, 200, 200, 15)
-        self.surf.fill((0, 125, 69))
+        super(EndPoint, self).__init__(800, 150, 200, 200, 15)
         self.inventory = []
         self.score_board = score_board
+        self.surf = pygame.transform.scale(pygame.image.load("Sprites/findlaysticker.png"), (200, 200))
+        self.surf = self.surf.convert()
+        self.surf.set_colorkey((0, 255, 0), RLEACCEL)
 
     def interact(self, player):
         if player.inventory is not None:

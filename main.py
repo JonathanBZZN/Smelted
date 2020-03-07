@@ -49,7 +49,7 @@ def run():
     pygame.mixer.music.play(-1)
 
     # Load background image
-    background = pygame.image.load("Sprites/bg.png")
+    background = pygame.image.load("Sprites/floor.png")
 
     # game clock
     while not done:
