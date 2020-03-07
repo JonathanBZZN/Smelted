@@ -18,6 +18,7 @@ endPoint = EndPoint()
 score = ScoreBoard()
 collect = CollectionPoint(Iron)
 grinder = Grinder()
+table = Table()
 
 # Init sprite groups
 all_sprites = pygame.sprite.Group()
@@ -29,6 +30,7 @@ all_sprites.add(collect)
 all_sprites.add(score)
 all_sprites.add(grinder)
 all_sprites.add(endPoint)
+all_sprites.add(table)
 
 # init game clock
 clock = pygame.time.Clock()
@@ -59,6 +61,7 @@ while not done:
     player1.update(pressed, all_sprites)
     player2.update(pressed, all_sprites)
     furnace.update()
+    table.update(screen)
 
     pygame.display.flip()
     clock.tick(60)

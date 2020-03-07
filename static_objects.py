@@ -109,6 +109,32 @@ class Hammer(StaticObject):
                 self.current_recipe = None
                 self.surf.fill((165, 165, 0))
 
+class Table(StaticObject):
+    
+    def __init__(self):
+        super(Table, self).__init__(0, 400, 100, 100, 15)
+        self.surf.fill((0, 0, 0))
+        self.inventory = None
+        self.interact_cooldown = 0
+
+    def interact(self, player):
+        if self.interact_cooldown != 0:
+            self.interact_cooldown -= 1
+            return
+
+        if player.inventory is not None and self.inventory is None:
+            self.inventory = player.inventory
+            player.inventory = None
+            self.interact_cooldown = 5
+        elif player.inventory is None and self.inventory is not None:
+            player.inventory = self.inventory
+            self.inventory = None
+            self.interact_cooldown = 5
+
+    def update(self, screen):
+        if self.inventory is not None:
+            self.inventory.update(self.rect.x + 10, self.rect.y + 100, self.surf.get_height(), self.surf.get_width())
+            screen.blit(screen, self.inventory.surf.get_rect())
 
 class Grinder(StaticObject):
 
