@@ -126,9 +126,13 @@ class Table(StaticObject):
     
     def __init__(self, x_pos, y_pos, width=100, height=100):
         super(Table, self).__init__(x_pos, y_pos, width, height, 15, print_inventory=True)
-        self.surf.fill((0, 0, 0))
         self.inventory = None
         self.interact_cooldown = 0
+
+        # Set table image
+        self.surf = pygame.transform.scale(pygame.image.load("Sprites/table.png"), (width, height))
+        self.surf = self.idle.convert()
+        self.surf.set_colorkey((0, 255, 0), RLEACCEL)
 
     def interact(self, player):
         if self.interact_cooldown != 0:
@@ -154,9 +158,19 @@ class Grinder(StaticObject):
 
     def __init__(self, x_pos, y_pos, width=100, height=100):
         super(Grinder, self).__init__(x_pos, y_pos, width, height, 15)
-        self.surf.fill((255,0,255))
         self.grind_time = 0
         self.current_recipe = None
+
+        # Set grinder images
+        self.idle = pygame.transform.scale(pygame.image.load("Sprites/grinder-idle.png"), (width, height))
+        self.idle = self.idle.convert()
+        self.idle.set_colorkey((0, 255, 0), RLEACCEL)
+
+        self.work = pygame.transform.scale(pygame.image.load("Sprites/grinder-active.png"), (width, height))
+        self.work = self.work.convert()
+        self.work.set_colorkey((0, 255, 0), RLEACCEL)
+
+        self.surf = self.idle
 
     def interact(self, player):
 
@@ -167,7 +181,7 @@ class Grinder(StaticObject):
                     self.grind_time = GRINDER_RECIPES[recipe][1]
                     self.current_recipe = recipe
                     player.inventory = None
-                    self.surf.fill((255, 0, 0))
+                    self.surf = self.work
                     break
 
         if self.current_recipe is not None and player.inventory is None:
@@ -178,7 +192,7 @@ class Grinder(StaticObject):
                 # Player has finished grinding
                 player.inventory = self.current_recipe()
                 self.current_recipe = None
-                self.surf.fill((255,0,255))
+                self.surf = self.idle
 
 
 class CollectionPoint(StaticObject):
