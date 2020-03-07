@@ -8,16 +8,25 @@ class ScoreBoard(StaticObject):
     def __init__(self):
         super(ScoreBoard, self).__init__(SCREEN_WIDTH - 400, 0, 400, SCREEN_HEIGHT)
         self.surf.fill((232, 135, 62))
+        # Score text
+        self.font = pygame.font.SysFont('comicsansms', 40, True)
+        self.score_rect = None
+        self.score_text = None
+
+        # Score board attributes
         self.score = 0
+        self.set_score()
         self.order_list = []
         self.print_inventory = True
 
+    def set_score(self):
+        self.score_text = self.font.render('Score: ' + str(self.score), True, (0, 0, 0))
+        self.score_rect = self.score_text.get_rect()
+        self.score_rect.center = (self.rect.x + (self.score_text.get_width() / 2) + 25, 40)
+
     def add_item(self):
         # Pick a random item from the end points and add to list
-        item = None
-        for i in END_POINTS:
-            item = i
-            break
+        item = random.choice(list(END_POINTS.keys()))
 
         # Convert item to an Expected
         item_e = Expected(END_POINTS[item][0], item, succeed_score=END_POINTS[item][1], fail_score=END_POINTS[item][2])
@@ -25,7 +34,6 @@ class ScoreBoard(StaticObject):
 
     def update(self):
         # Loop through each item in order and reduce time
-        print(self.score)
         self.update_times()
 
     def update_times(self):
@@ -43,10 +51,14 @@ class ScoreBoard(StaticObject):
             # Remove the score for each failure
             self.order_list.remove(item)
             self.score -= item.fail_score
+            self.set_score()
 
     def print(self, screen):
+        # First print the score
+        screen.blit(self.score_text, self.score_rect)
+
         # Loop through each item in inventory and print
-        y = 0
+        y = 50
 
         for item in self.order_list:
             # Update y component
@@ -81,6 +93,7 @@ class EndPoint(StaticObject):
                     # Completed goal so add score and remove item from order
                     player.inventory = None
                     self.score_board.score += item.succeed_score
+                    self.score_board.set_score()
                     item_drop = item
                     break
 
