@@ -99,7 +99,7 @@ def load_map(map, all_sprites):
     # Load in all objects
     for item in map["OBJECTS"]:
         # Create this object and add to all_sprites
-        item_instance = item(*map["OBJECTS"][item])
+        item_instance = item[0](*item[1])
         all_sprites.add(item_instance)
 
         # If item instance of furnace add to update

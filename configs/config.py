@@ -29,13 +29,13 @@ MAP_1 = {
     "PLAYER_1_POS": (100, 100),
     "PLAYER_2_POS": (100, 200),
 
-    "OBJECTS": {
-        Furnace: (500, 500),
-        Grinder: (700, 500),
-        Hammer: (300, 500),
-        Table: (700, 100),
-        CollectionPoint: (Iron, 200, 200)
-    },
+    "OBJECTS": [
+        (Furnace, (500, 500)),
+        (Grinder, (700, 500)),
+        (Hammer, (300, 500)),
+        (Table, (700, 100)),
+        (CollectionPoint, (Iron, 200, 200))
+    ],
 
     "SUBMIT_POS": (300, 300),
     "TIME_LIMIT": 60*20,
