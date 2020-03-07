@@ -6,12 +6,15 @@ from conifg import *
 
 class Player(pygame.sprite.Sprite):
 
-    def __init__(self):
+    def __init__(self, controls):
         super(Player, self).__init__()
         self.surf = pygame.Surface((50, 50))
         self.surf.fill((0, 128, 255))
         self.rect = self.surf.get_rect()
+        self.interactive_border = self.rect
         self.inventory = None
+        self.controls = controls
+        self.speed = 10
 
     def update(self, pressed, entities):
         # Remove self from entities
@@ -20,18 +23,18 @@ class Player(pygame.sprite.Sprite):
         y = 0
 
         # Check keys pressed
-        if pressed[pygame.K_RIGHT]:
+        if pressed[self.controls["RIGHT"]]:
             # Right pressed
-            x += 10
-        if pressed[pygame.K_LEFT]:
+            x += self.speed
+        if pressed[self.controls["LEFT"]]:
             # Left Pressed
-            x -= 10
-        if pressed[pygame.K_UP]:
+            x -= self.speed
+        if pressed[self.controls["UP"]]:
             # Up pressed
-            y -= 10
-        if pressed[pygame.K_DOWN]:
+            y -= self.speed
+        if pressed[self.controls["DOWN"]]:
             # Down pressed
-            y += 10
+            y += self.speed
 
         # Entity collision
         self.entityCollision(entities, x, y)
@@ -45,7 +48,7 @@ class Player(pygame.sprite.Sprite):
 
     def entityInteraction(self, entities, pressed):
         for entity in entities:
-            if self.rect.colliderect(entity.interactive_border) and pressed[pygame.K_RCTRL]:
+            if self.rect.colliderect(entity.interactive_border) and pressed[self.controls["USE"]]:
                 entity.interact(self)
 
     def entityCollision(self, entities, x, y):

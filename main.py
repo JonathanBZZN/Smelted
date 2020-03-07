@@ -7,14 +7,18 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 done = False
 
 # init player
-player = Player()
+player1 = Player(PLAYER_1_CONFIG)
+player2 = Player(PLAYER_2_CONFIG)
+player2.rect.x = 200
+
 wall = Wall()
 furnace = Furnace()
-collect = CollectionPoint()
+collect = CollectionPoint(Iron)
 
 # Init sprite groups
 all_sprites = pygame.sprite.Group()
-all_sprites.add(player)
+all_sprites.add(player1)
+all_sprites.add(player2)
 all_sprites.add(furnace)
 all_sprites.add(wall)
 all_sprites.add(collect)
@@ -45,7 +49,8 @@ while not done:
 
     # Update players
     pressed = pygame.key.get_pressed()
-    player.update(pressed, all_sprites)
+    player1.update(pressed, all_sprites)
+    player2.update(pressed, all_sprites)
     furnace.update()
 
     pygame.display.flip()

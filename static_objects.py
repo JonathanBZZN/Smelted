@@ -54,17 +54,18 @@ class Furnace(StaticObject):
 
 class CollectionPoint(StaticObject):
 
-    def __init__(self):
+    def __init__(self, output):
         super(CollectionPoint, self).__init__(800, 100, 100, 100, 15)
         self.surf.fill((0, 0, 255))
+        self.output = output
 
     def interact(self, player):
         if player.inventory is None:
-            player.inventory = Iron()
+            player.inventory = self.output()
 
 
 class Wall(StaticObject):
 
     def __init__(self):
         super(Wall, self).__init__(50, 50, 50, 50)
-        self.surf.fill((255, 0, 0))
+        self.surf.fill((169, 169, 169))

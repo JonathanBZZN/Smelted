@@ -4,15 +4,20 @@ from pygame.locals import RLEACCEL
 
 class Item(pygame.sprite.Sprite):
 
-    def __init__(self, width, height, smelt_time=0, output=None, smeltable=False):
+    def __init__(self, width, height, smelt_time=0, smelt_output=None, smeltable=False, hammer_time=0, hammer_output=None, hammerable=False):
         super(Item, self).__init__()
         self.surf = pygame.Surface((width, height))
         self.rect = self.surf.get_rect(x=0, y=0)
 
         # Smelting attributes
         self.smelt_time = smelt_time
-        self.output = output
+        self.output = smelt_output
         self.smeltable = smeltable
+
+        # Hammering attributes
+        self.hammer_time = hammer_time
+        self.hammer_output = hammer_output
+        self.hammerable = hammerable
 
     def update(self, x, y, player_height, player_width):
         self.rect.x = x + (player_width / 2) - (self.surf.get_width() / 2)
