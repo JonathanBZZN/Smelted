@@ -1,5 +1,6 @@
 import pygame
 from math import sqrt
+from conifg import *
 
 
 class Player:
@@ -27,8 +28,25 @@ class Player:
             # Down pressed
             y += 5
 
+
         # Update position
         self.position += Vector(x, y)
+
+        # Check the border
+        self.borderCollisionCheck()
+
+    def borderCollisionCheck(self):
+
+        # Basic border collision detection
+        if self.position.x < 0:
+            self.position.x = 0
+        if self.position.x > SCREEN_WIDTH - 60 :# width: # TODO add player attributes width, height
+            self.position.x = SCREEN_WIDTH - 60
+        if self.position.y < 0:
+            self.position.y = 0
+        if self.position.y > SCREEN_HEIGHT - 60 :# height:
+            self.position.y = SCREEN_HEIGHT - 60
+
 
     def draw(self, screen):
         pygame.draw.rect(screen, self.color, pygame.Rect(self.position.x, self.position.y, 60, 60))

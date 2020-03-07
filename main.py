@@ -1,8 +1,9 @@
 import pygame
 from player import *
+from conifg import *
 
 pygame.init()
-screen = pygame.display.set_mode((1600, 900))
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 done = False
 
 # init player
