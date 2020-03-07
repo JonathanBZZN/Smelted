@@ -1,5 +1,4 @@
-from static_objects import StaticObject
-from config import *
+from configs.config import *
 import random
 
 

@@ -1,8 +1,4 @@
-import pygame
-from vector import Vector
-from math import sqrt
-from pygame.locals import RLEACCEL
-from config import *
+from configs.config import *
 
 
 class Player(pygame.sprite.Sprite):

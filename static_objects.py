@@ -1,6 +1,4 @@
-import pygame
-from items import *
-from config import *
+from configs.recipes import *
 
 
 class StaticObject(pygame.sprite.Sprite):
@@ -26,7 +24,6 @@ class StaticObject(pygame.sprite.Sprite):
 
 
 class Furnace(StaticObject):
-
     def __init__(self, x_pos, y_pos, width=200, height=200):
         super(Furnace, self).__init__(x_pos, y_pos, width, height, 15)
         # Set furnace image

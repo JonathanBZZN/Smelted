@@ -1,7 +1,6 @@
 from player import *
-from static_objects import *
 from score_board import *
-from config import *
+from configs.config import *
 from swords import *
 
 
