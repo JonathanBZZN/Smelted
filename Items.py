@@ -38,4 +38,7 @@ class Steel(Item):
 
     def __init__(self):
         super(Steel, self).__init__(50, 25)
-        self.surf.fill((50, 0, 50))
+        self.surf = pygame.transform.scale(pygame.image.load("Sprites/hot_steel.png"), (50, 37))
+        self.surf = self.surf.convert()
+        self.rect = self.surf.get_rect()
+        self.surf.set_colorkey((0, 255, 0), RLEACCEL)
