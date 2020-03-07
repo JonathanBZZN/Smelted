@@ -69,7 +69,6 @@ class ScoreBoard(StaticObject):
     def print(self, screen):
         # First print the score
         screen.blit(self.score_text, self.score_rect)
-        print(self.time)
 
         # Print time remaining
         bar_pos = (self.rect.x + 25, 25)
