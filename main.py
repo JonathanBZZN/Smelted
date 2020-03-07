@@ -24,6 +24,7 @@ def run_map(map, screen):
     # Load map
     all_sprites = pygame.sprite.Group()
     player1, player2, score, update = load_map(map, all_sprites)
+    score.total_time = map_time
 
     # init game clock
     clock = pygame.time.Clock()
@@ -35,6 +36,7 @@ def run_map(map, screen):
     while not done:
         # Set screen background
         map_time -= 1
+        score.time = map_time
         screen.blit(background, (0, 0))
 
         # Draw all sprites

@@ -37,7 +37,7 @@ MAP_1 = {
     },
 
     "SUBMIT_POS": (300, 300),
-    "TIME_LIMIT": 10000,
+    "TIME_LIMIT": 60*20,
 }
 
 END_POINTS = {

@@ -10,6 +10,8 @@ class ScoreBoard(StaticObject):
         # Score text
         self.font = pygame.font.SysFont('comicsansms', 40, True)
         self.score_rect = None
+        self.total_time = 0
+        self.time = 0
         self.score_text = None
 
         # Score board attributes
@@ -21,7 +23,7 @@ class ScoreBoard(StaticObject):
     def set_score(self):
         self.score_text = self.font.render('Score: ' + str(self.score), True, (0, 0, 0))
         self.score_rect = self.score_text.get_rect()
-        self.score_rect.center = (self.rect.x + (self.score_text.get_width() / 2) + 25, 40)
+        self.score_rect.center = (self.rect.x + (self.score_text.get_width() / 2) + 25, 80)
 
     def add_item(self):
         # Pick a random item from the end points and add to list
@@ -44,7 +46,7 @@ class ScoreBoard(StaticObject):
             self.add_item()
         else:
             # Use randomness to add item
-            if random.random() > 0.99:
+            if random.random() > 0.999:
                 self.add_item()
 
     def update_times(self):
@@ -67,9 +69,16 @@ class ScoreBoard(StaticObject):
     def print(self, screen):
         # First print the score
         screen.blit(self.score_text, self.score_rect)
+        print(self.time)
+
+        # Print time remaining
+        bar_pos = (self.rect.x + 25, 25)
+        bar_size = (350, 25)
+        border_color = (0, 0, 0)
+        DrawBar(bar_pos, bar_size, border_color, self.time / self.total_time, screen)
 
         # Loop through each item in inventory and print
-        y = 50
+        y = 100
 
         for item in self.order_list:
             # Update y component
