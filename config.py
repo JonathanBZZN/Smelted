@@ -43,6 +43,6 @@ GRINDER_RECIPES = {
     SharpBasicSword: (BasicSword, 100)
 }
 
-END_POINTS = [
-    SharpBasicSword
-]
+END_POINTS = {
+    Iron: (2000, 100, 10)
+}

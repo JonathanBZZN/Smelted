@@ -1,5 +1,6 @@
 from player import *
 from static_objects import *
+from score_board import *
 from config import *
 from swords import *
 
@@ -14,8 +15,8 @@ player2.rect.x = 200
 
 furnace = Furnace()
 Hammer = Hammer()
-endPoint = EndPoint()
 score = ScoreBoard()
+endPoint = EndPoint(score)
 collect = CollectionPoint(Iron)
 grinder = Grinder()
 table = Table()
@@ -31,6 +32,10 @@ all_sprites.add(score)
 all_sprites.add(grinder)
 all_sprites.add(endPoint)
 all_sprites.add(table)
+score.add_item()
+score.add_item()
+score.add_item()
+score.add_item()
 
 # init game clock
 clock = pygame.time.Clock()
@@ -50,6 +55,9 @@ while not done:
         else:
             screen.blit(entity.surf, entity.rect)
 
+        if isinstance(entity, StaticObject) and entity.print_inventory:
+            entity.print(screen)
+
     # Loop through every event in the queue
     for event in pygame.event.get():
         # Quiting
@@ -61,7 +69,6 @@ while not done:
     player1.update(pressed, all_sprites)
     player2.update(pressed, all_sprites)
     furnace.update()
-    table.update(screen)
 
     pygame.display.flip()
     clock.tick(60)
