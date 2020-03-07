@@ -1,6 +1,7 @@
 import pygame
 from vector import Vector
 from math import sqrt
+from conifg import *
 
 
 class Player(pygame.sprite.Sprite):
@@ -31,6 +32,7 @@ class Player(pygame.sprite.Sprite):
             # Down pressed
             y += 5
 
+        # Entity collision
         old_x = self.rect.x
         new_x = self.rect.x + x
         old_y = self.rect.y
@@ -46,3 +48,18 @@ class Player(pygame.sprite.Sprite):
         if pygame.sprite.spritecollide(self, entities, False):
             # Changing y caused collision
             self.rect.y = old_y
+
+        # Border collision
+        self.borderCollisionCheck()
+
+    def borderCollisionCheck(self):
+
+        # Basic border collision detection
+        if self.position.x < 0:
+            self.position.x = 0
+        if self.position.x > SCREEN_WIDTH - 60 :# width: # TODO add player attributes width, height
+            self.position.x = SCREEN_WIDTH - 60
+        if self.position.y < 0:
+            self.position.y = 0
+        if self.position.y > SCREEN_HEIGHT - 60 :# height:
+            self.position.y = SCREEN_HEIGHT - 60
