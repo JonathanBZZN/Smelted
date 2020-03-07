@@ -5,7 +5,7 @@ from config import *
 
 class StaticObject(pygame.sprite.Sprite):
 
-    def __init__(self, x, y, width, height, interactive_border_radius=0):
+    def __init__(self, x, y, width, height, interactive_border_radius=0, print_inventory=False):
         super(StaticObject, self).__init__()
 
         self.surf = pygame.Surface((width, height))
@@ -16,7 +16,7 @@ class StaticObject(pygame.sprite.Sprite):
                                               self.rect.width + 2 * interactive_border_radius,
                                               self.rect.height + 2 * interactive_border_radius)
 
-        self.print_inventory = False
+        self.print_inventory = print_inventory
 
     def interact(self, player):
         pass
@@ -117,7 +117,7 @@ class Hammer(StaticObject):
 class Table(StaticObject):
     
     def __init__(self):
-        super(Table, self).__init__(0, 400, 100, 100, 15)
+        super(Table, self).__init__(0, 400, 100, 100, 15, print_inventory=True)
         self.surf.fill((0, 0, 0))
         self.inventory = None
         self.interact_cooldown = 0
@@ -130,16 +130,16 @@ class Table(StaticObject):
         if player.inventory is not None and self.inventory is None:
             self.inventory = player.inventory
             player.inventory = None
-            self.interact_cooldown = 5
+            self.interact_cooldown = 7
         elif player.inventory is None and self.inventory is not None:
             player.inventory = self.inventory
             self.inventory = None
-            self.interact_cooldown = 5
+            self.interact_cooldown = 7
 
-    def update(self, screen):
+    def print(self, screen):
         if self.inventory is not None:
-            self.inventory.update(self.rect.x + 10, self.rect.y + 100, self.surf.get_height(), self.surf.get_width())
-            screen.blit(screen, self.inventory.surf.get_rect())
+            self.inventory.update(self.rect.x, self.rect.y + self.surf.get_height() / 2, self.surf.get_height(), self.surf.get_width())
+            screen.blit(self.inventory.surf, self.inventory.rect)
 
 class Grinder(StaticObject):
 
