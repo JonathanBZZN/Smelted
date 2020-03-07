@@ -12,10 +12,10 @@ player1 = Player(PLAYER_1_CONFIG)
 player2 = Player(PLAYER_2_CONFIG)
 player2.rect.x = 200
 
-wall = Wall()
 furnace = Furnace()
 Hammer = Hammer()
 endPoint = EndPoint()
+score = ScoreBoard()
 collect = CollectionPoint(Iron)
 grinder = Grinder()
 
@@ -24,9 +24,9 @@ all_sprites = pygame.sprite.Group()
 all_sprites.add(player1)
 all_sprites.add(player2)
 all_sprites.add(furnace)
-all_sprites.add(wall)
 all_sprites.add(Hammer)
 all_sprites.add(collect)
+all_sprites.add(score)
 all_sprites.add(grinder)
 all_sprites.add(endPoint)
 
