@@ -41,7 +41,7 @@ class Player(pygame.sprite.Sprite):
 
         # Display Inventory
         if self.inventory is not None:
-            print("Test")
+            self.inventory.update(self.rect.x, self.rect.y, self.surf.get_height(), self.surf.get_width())
 
     def entityInteraction(self, entities, pressed):
         for entity in entities:

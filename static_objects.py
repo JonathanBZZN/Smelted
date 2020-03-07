@@ -1,6 +1,7 @@
 import pygame
 from Items import *
 
+
 class StaticObject(pygame.sprite.Sprite):
 
     def __init__(self, x, y, width, height, interactive_border_radius=0):

@@ -29,7 +29,13 @@ while not done:
 
     # Draw all sprites
     for entity in all_sprites:
-        screen.blit(entity.surf, entity.rect)
+        if isinstance(entity, Player):
+            screen.blit(entity.surf, entity.rect)
+            # Draw inventory if not none
+            if entity.inventory is not None:
+                screen.blit(entity.inventory.surf, entity.inventory.rect)
+        else:
+            screen.blit(entity.surf, entity.rect)
 
     # Loop through every event in the queue
     for event in pygame.event.get():
