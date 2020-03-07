@@ -42,9 +42,7 @@ def run():
     # init game clock
     clock = pygame.time.Clock()
 
-    # start music
-    pygame.mixer.music.load("Music/ingame.mp3")
-    pygame.mixer.music.play(-1)
+
 
     # game clock
     while not done:
