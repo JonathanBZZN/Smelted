@@ -16,7 +16,12 @@ class StaticObject(pygame.sprite.Sprite):
                                               self.rect.width + 2 * interactive_border_radius,
                                               self.rect.height + 2 * interactive_border_radius)
 
+        self.print_inventory = False
+
     def interact(self, player):
+        pass
+
+    def print(self, screen):
         pass
 
 
@@ -141,18 +146,6 @@ class Grinder(StaticObject):
                 self.surf.fill((255,0,255))
 
 
-class EndPoint(StaticObject):
-
-    def __init__(self):
-        super(EndPoint, self).__init__(400, 300, 200, 200, 15)
-        self.surf.fill((0, 125, 69))
-        self.inventory = []
-
-    def interact(self, player):
-        if player.inventory is not None and any(isinstance(player.inventory, x) for x in END_POINTS):
-            player.inventory = None
-
-
 class CollectionPoint(StaticObject):
 
     def __init__(self, output):
@@ -173,13 +166,6 @@ class Bin(StaticObject):
 
     def interact(self, player):
         player.inventory = None
-
-
-class ScoreBoard(StaticObject):
-
-    def __init__(self):
-        super(ScoreBoard, self).__init__(SCREEN_WIDTH - 400, 0, 400, 200)
-        self.surf.fill((100, 0, 200))
 
 
 class Wall(StaticObject):
