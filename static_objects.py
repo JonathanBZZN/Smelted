@@ -1,6 +1,4 @@
-import pygame
-from items import *
-from config import *
+from configs.recipes import *
 
 
 class StaticObject(pygame.sprite.Sprite):
@@ -26,8 +24,7 @@ class StaticObject(pygame.sprite.Sprite):
 
 
 class Furnace(StaticObject):
-
-    def __init__(self, width=200, height=200, x_pos=300, y_pos=300):
+    def __init__(self, x_pos, y_pos, width=200, height=200):
         super(Furnace, self).__init__(x_pos, y_pos, width, height, 15)
         # Set furnace image
         self.idle = pygame.transform.scale(pygame.image.load("Sprites/furnace-idle.png"), (width, height))
@@ -86,7 +83,7 @@ class Furnace(StaticObject):
 
 class Hammer(StaticObject):
 
-    def __init__(self, width=200, height=200, x_pos=500, y_pos=500):
+    def __init__(self, x_pos, y_pos, width=100, height=75):
         super(Hammer, self).__init__(x_pos, y_pos, width, height, 15)
         self.hammer_time = 0
         self.current_recipe = None
@@ -124,10 +121,11 @@ class Hammer(StaticObject):
                 self.current_recipe = None
                 self.surf = self.idle
 
+
 class Table(StaticObject):
     
-    def __init__(self):
-        super(Table, self).__init__(0, 400, 100, 100, 15, print_inventory=True)
+    def __init__(self, x_pos, y_pos, width=100, height=100):
+        super(Table, self).__init__(x_pos, y_pos, width, height, 15, print_inventory=True)
         self.surf.fill((0, 0, 0))
         self.inventory = None
         self.interact_cooldown = 0
@@ -151,10 +149,11 @@ class Table(StaticObject):
             self.inventory.update(self.rect.x, self.rect.y + self.surf.get_height() / 2, self.surf.get_height(), self.surf.get_width())
             screen.blit(self.inventory.surf, self.inventory.rect)
 
+
 class Grinder(StaticObject):
 
-    def __init__(self):
-        super(Grinder, self).__init__(400, 800, 100, 100, 15)
+    def __init__(self, x_pos, y_pos, width=100, height=100):
+        super(Grinder, self).__init__(x_pos, y_pos, width, height, 15)
         self.surf.fill((255,0,255))
         self.grind_time = 0
         self.current_recipe = None
@@ -184,22 +183,30 @@ class Grinder(StaticObject):
 
 class CollectionPoint(StaticObject):
 
-    def __init__(self, output):
-        super(CollectionPoint, self).__init__(800, 500, 100, 100, 15)
-        self.surf = pygame.transform.scale(pygame.image.load("Sprites/collection.png"), (100, 100))
+    def __init__(self, output, x_pos, y_pos, width=100, height=100):
+        super(CollectionPoint, self).__init__(x_pos, y_pos, width, height, 15)
+        self.surf = pygame.transform.scale(pygame.image.load("Sprites/collection.png"), (width, height))
         self.surf = self.surf.convert()
         self.surf.set_colorkey((0, 255, 0), RLEACCEL)
         self.output = output
+
+        # Set printing
+        self.print_inventory = True
+        self.print_object = output()
+        self.print_object.update(self.rect.x, self.rect.y, self.surf.get_height(), self.surf.get_width())
 
     def interact(self, player):
         if player.inventory is None:
             player.inventory = self.output()
 
+    def print(self, screen):
+        screen.blit(self.print_object.surf, self.print_object.rect)
+
 
 class Bin(StaticObject):
 
-    def __init__(self):
-        super(Bin, self).__init__(800, 800, 50, 50, 15)
+    def __init__(self, x_pos, y_pos, width=50, height=50):
+        super(Bin, self).__init__(x_pos, y_pos, width, height, 15)
         self.surf.fill((0, 0, 0))
 
     def interact(self, player):
@@ -208,6 +215,6 @@ class Bin(StaticObject):
 
 class Wall(StaticObject):
 
-    def __init__(self):
-        super(Wall, self).__init__(50, 50, 50, 50)
+    def __init__(self, x_pos, y_pos, width=50, height=50):
+        super(Wall, self).__init__(x_pos, y_pos, width, height)
         self.surf.fill((169, 169, 169))

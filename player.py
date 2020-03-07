@@ -1,13 +1,9 @@
-import pygame
-from vector import Vector
-from math import sqrt
-from pygame.locals import RLEACCEL
-from config import *
+from configs.config import *
 
 
 class Player(pygame.sprite.Sprite):
 
-    def __init__(self, config):
+    def __init__(self, config, x_pos, y_pos):
         super(Player, self).__init__()
         # Set player sprite
         self.surf = pygame.transform.scale(pygame.image.load(config["IMG"]), (75, 100))
@@ -17,6 +13,8 @@ class Player(pygame.sprite.Sprite):
         # Set player boundaries
         self.rect = self.surf.get_rect()
         self.interactive_border = self.rect
+        self.rect.x = x_pos
+        self.rect.y = y_pos
 
         # Init player attributes
         self.inventory = None

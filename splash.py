@@ -40,6 +40,10 @@ def game_intro():
     menuRect[2].center = (50, height - 50)
     menuRect[3].center = (50, height - 50)
 
+    # start music
+    pygame.mixer.music.load("Music/ingame.mp3")
+    pygame.mixer.music.play(-1)
+
     while True:
         screen.blit(menuLoaded[4], (0, 0))
         for x in range(2):
@@ -64,6 +68,8 @@ def game_intro():
             if click[0] == 1:
                 gameplay()
 
+
+
         textStartrect.center = (width/2 - 255, height/2 + 100)
         screen.blit(textStart, textStartrect)
 
@@ -78,8 +84,10 @@ def game_intro():
                 if click[0] == 1:
                     if sound:
                         sound = False
-                    elif (not sound):
+                        pygame.mixer.music.pause()
+                    elif not sound:
                         sound = True
+                        pygame.mixer.music.unpause()
                     lastTime = pygame.time.get_ticks()
 
         textQuitrect.center = (width/2 + 260, height/2 + 100)
