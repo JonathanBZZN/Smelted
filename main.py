@@ -1,5 +1,5 @@
 from player import *
-from StaticObjects.wall import *
+from static_objects import *
 from conifg import *
 
 pygame.init()
