@@ -10,7 +10,8 @@ def run():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
     # run each map
-    run_map(MAP_1, screen)
+    for MAP in MAPS:
+        run_map(MAP, screen)
 
     # Clean up
     pygame.quit()
