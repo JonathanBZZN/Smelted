@@ -1,4 +1,5 @@
 import pygame
+from items import *
 
 SCREEN_WIDTH = 1600
 SCREEN_HEIGHT = 900
@@ -17,4 +18,8 @@ PLAYER_2_CONFIG = {
     "LEFT": pygame.K_a,
     "RIGHT": pygame.K_d,
     "USE": pygame.K_LSHIFT
+}
+
+SMELT_RECIPES = {
+    Steel: (Iron, 120)
 }

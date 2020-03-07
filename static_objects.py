@@ -1,6 +1,6 @@
 import pygame
-from Items import *
-
+from items import *
+from conifg import *
 
 class StaticObject(pygame.sprite.Sprite):
 
@@ -25,31 +25,43 @@ class Furnace(StaticObject):
         super(Furnace, self).__init__(300, 300, 200, 200, 15)
         self.surf.fill((255, 165, 0))
         self.inventory = None
+        self.current_smelt = None
         self.finished = False
-        self.burnTime = 0
+        self.burn_time = 0
 
     def interact(self, player):
-        if player.inventory is not None and player.inventory.smeltable and self.inventory is None:
-            # Update the inventories
+        if self.inventory is None and player.inventory is not None and player.inventory.smeltable:
+            # Add item in players inventory to the furnace
             self.inventory = player.inventory
             player.inventory = None
 
-            # Set the furnace to burning
+            # Now check if the items match inputs to a recipe
+            for recipe in SMELT_RECIPES:
+                if isinstance(self.inventory, SMELT_RECIPES[recipe][0]) and self.current_smelt != recipe:
+                    # Start smelting
+                    self.burn_time = SMELT_RECIPES[recipe][1]
+                    self.current_smelt = recipe
+
+            # Update color
             self.surf.fill((255, 0, 0))
-            self.burnTime = self.inventory.smelt_time
+
         elif player.inventory is None and self.finished:
             self.finished = False
             player.inventory = self.inventory
             self.inventory = None
 
     def update(self):
-        if self.burnTime > 0:
-            self.burnTime -= 1
-
-        if self.burnTime == 0 and self.inventory is not None and not self.finished:
-            self.surf.fill((255, 165, 0))
-            self.inventory = self.inventory.output
-            self.finished = True
+        # Check if there is a current recipe
+        if self.current_smelt is not None:
+            if self.burn_time > 0:
+                # Reduce burn time
+                self.burn_time -= 1
+            elif self.burn_time == 0:
+                # Produce output and reset furnace
+                self.inventory = self.current_smelt()
+                self.current_smelt = None
+                self.finished = True
+                self.surf.fill((255, 165, 0))
 
 
 class CollectionPoint(StaticObject):
