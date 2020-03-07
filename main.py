@@ -10,12 +10,14 @@ done = False
 player = Player()
 wall = Wall()
 furnace = Furnace()
+collect = CollectionPoint()
 
 # Init sprite groups
 all_sprites = pygame.sprite.Group()
 all_sprites.add(player)
 all_sprites.add(furnace)
 all_sprites.add(wall)
+all_sprites.add(collect)
 
 # init game clock
 clock = pygame.time.Clock()

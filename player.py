@@ -11,6 +11,7 @@ class Player(pygame.sprite.Sprite):
         self.surf = pygame.Surface((50, 50))
         self.surf.fill((0, 128, 255))
         self.rect = self.surf.get_rect()
+        self.inventory = None
 
     def update(self, pressed, entities):
         # Remove self from entities
@@ -21,27 +22,31 @@ class Player(pygame.sprite.Sprite):
         # Check keys pressed
         if pressed[pygame.K_RIGHT]:
             # Right pressed
-            x += 5
+            x += 10
         if pressed[pygame.K_LEFT]:
             # Left Pressed
-            x -= 5
+            x -= 10
         if pressed[pygame.K_UP]:
             # Up pressed
-            y -= 5
+            y -= 10
         if pressed[pygame.K_DOWN]:
             # Down pressed
-            y += 5
+            y += 10
 
         # Entity collision
         self.entityCollision(entities, x, y)
         self.borderCollisionCheck()
-        self.entityInteraction(entities)
+        self.entityInteraction(entities, pressed)
         entities.add(self)
 
-    def entityInteraction(self, entities):
+        # Display Inventory
+        if self.inventory is not None:
+            print("Test")
+
+    def entityInteraction(self, entities, pressed):
         for entity in entities:
-            if self.rect.colliderect(entity.interactive_border):
-                print("Test")
+            if self.rect.colliderect(entity.interactive_border) and pressed[pygame.K_RCTRL]:
+                entity.interact(self)
 
     def entityCollision(self, entities, x, y):
         old_x = self.rect.x

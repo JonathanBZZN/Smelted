@@ -1,5 +1,5 @@
 import pygame
-
+from Items import *
 
 class StaticObject(pygame.sprite.Sprite):
 
@@ -14,12 +14,26 @@ class StaticObject(pygame.sprite.Sprite):
                                               self.rect.width + 2 * interactive_border_radius,
                                               self.rect.height + 2 * interactive_border_radius)
 
+    def interact(self, player):
+        pass
+
 
 class Furnace(StaticObject):
 
     def __init__(self):
-        super(Furnace, self).__init__(300, 300, 200, 200, 25)
+        super(Furnace, self).__init__(300, 300, 200, 200, 15)
         self.surf.fill((255, 165, 0))
+
+
+class CollectionPoint(StaticObject):
+
+    def __init__(self):
+        super(CollectionPoint, self).__init__(800, 100, 100, 100, 15)
+        self.surf.fill((0, 0, 255))
+
+    def interact(self, player):
+        if player.inventory is None:
+            player.inventory = Iron()
 
 
 class Wall(StaticObject):
