@@ -88,9 +88,19 @@ class Hammer(StaticObject):
 
     def __init__(self, width=200, height=200, x_pos=500, y_pos=500):
         super(Hammer, self).__init__(x_pos, y_pos, width, height, 15)
-        self.surf.fill((165, 165, 0))
         self.hammer_time = 0
         self.current_recipe = None
+
+        # Set hammer image
+        self.idle = pygame.transform.scale(pygame.image.load("Sprites/anvil-idle.png"), (width, height))
+        self.idle = self.idle.convert()
+        self.idle.set_colorkey((0, 255, 0), RLEACCEL)
+
+        self.work = pygame.transform.scale(pygame.image.load("Sprites/anvil-running.png"), (width, height))
+        self.work = self.work.convert()
+        self.work.set_colorkey((0, 255, 0), RLEACCEL)
+
+        self.surf = self.idle
 
     def interact(self, player):
         if self.current_recipe is None and player.inventory is not None and player.inventory.hammerable:
@@ -98,10 +108,10 @@ class Hammer(StaticObject):
             for recipe in HAMMER_RECIPES:
                 if isinstance(player.inventory, HAMMER_RECIPES[recipe][0]):
                     # Start hammering
+                    self.surf = self.work
                     self.hammer_time = HAMMER_RECIPES[recipe][1]
                     self.current_recipe = recipe
                     player.inventory = None
-                    self.surf.fill((255, 0, 0))
                     break
 
         if self.current_recipe is not None and player.inventory is None:
@@ -112,7 +122,7 @@ class Hammer(StaticObject):
                 # Player finished hammering
                 player.inventory = self.current_recipe()
                 self.current_recipe = None
-                self.surf.fill((165, 165, 0))
+                self.surf = self.idle
 
 
 class Grinder(StaticObject):
@@ -149,7 +159,7 @@ class Grinder(StaticObject):
 class CollectionPoint(StaticObject):
 
     def __init__(self, output):
-        super(CollectionPoint, self).__init__(800, 100, 100, 100, 15)
+        super(CollectionPoint, self).__init__(800, 500, 100, 100, 15)
         self.surf.fill((0, 0, 255))
         self.output = output
 
