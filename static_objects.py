@@ -29,7 +29,7 @@ class Furnace(StaticObject):
         self.burnTime = 0
 
     def interact(self, player):
-        if isinstance(player.inventory, Smeltable) and self.inventory is None:
+        if player.inventory is not None and player.inventory.smeltable and self.inventory is None:
             # Update the inventories
             self.inventory = player.inventory
             player.inventory = None
