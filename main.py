@@ -9,10 +9,12 @@ done = False
 # init player
 player = Player()
 wall = Wall()
+furnace = Furnace()
 
 # Init sprite groups
 all_sprites = pygame.sprite.Group()
 all_sprites.add(player)
+all_sprites.add(furnace)
 all_sprites.add(wall)
 
 # init game clock
@@ -35,7 +37,7 @@ while not done:
 
     # Update players
     pressed = pygame.key.get_pressed()
-    player.update(pressed, [wall])
+    player.update(pressed, all_sprites)
 
     pygame.display.flip()
     clock.tick(60)

@@ -13,6 +13,8 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.surf.get_rect()
 
     def update(self, pressed, entities):
+        # Remove self from entities
+        entities.remove(self)
         x = 0
         y = 0
 
@@ -49,6 +51,7 @@ class Player(pygame.sprite.Sprite):
 
         # Border collision
         self.borderCollisionCheck()
+        entities.add(self)
 
     def borderCollisionCheck(self):
 
