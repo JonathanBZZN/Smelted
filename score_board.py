@@ -46,7 +46,7 @@ class ScoreBoard(StaticObject):
             self.add_item()
         else:
             # Use randomness to add item
-            if random.random() > 0.999:
+            if random.random() > 0.99:
                 self.add_item()
 
     def update_times(self):
@@ -121,16 +121,24 @@ def DrawBar(pos, size, border_c, progress, screen):
 
 class EndPoint(StaticObject):
 
-    def __init__(self, score_board):
-        super(EndPoint, self).__init__(800, 150, 200, 200, 15)
     def __init__(self, score_board, x_pos, y_pos):
         super(EndPoint, self).__init__(x_pos, y_pos, 200, 200, 15)
         self.surf.fill((0, 125, 69))
         self.inventory = []
         self.score_board = score_board
-        self.surf = pygame.transform.scale(pygame.image.load("Sprites/findlaysticker.png"), (200, 200))
-        self.surf = self.surf.convert()
-        self.surf.set_colorkey((0, 255, 0), RLEACCEL)
+
+        # Init images
+        self.idle = pygame.transform.scale(pygame.image.load("Sprites/findlaysticker.png"), (200, 200))
+        self.idle = self.idle.convert()
+        self.idle.set_colorkey((0, 255, 0), RLEACCEL)
+
+        self.active = pygame.transform.scale(pygame.image.load("Sprites/findlaysticker-open.png"), (200, 200))
+        self.active = self.active.convert()
+        self.active.set_colorkey((0, 255, 0), RLEACCEL)
+
+        self.surf = self.idle
+
+        self.counter = 0
 
     def interact(self, player):
         if player.inventory is not None:
@@ -140,6 +148,8 @@ class EndPoint(StaticObject):
             for item in self.score_board.order_list:
                 if isinstance(player.inventory, item.object):
                     # Completed goal so add score and remove item from order
+                    self.surf = self.active
+                    self.counter = 20
                     player.inventory = None
                     self.score_board.score += item.succeed_score
                     self.score_board.set_score()
@@ -149,6 +159,12 @@ class EndPoint(StaticObject):
             # Update order list if needed
             if item_drop is not None:
                 self.score_board.order_list.remove(item_drop)
+
+    def update(self):
+        if self.counter != 0:
+            self.counter -= 1
+        else:
+            self.surf = self.idle
 
 
 class Expected:
