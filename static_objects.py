@@ -9,7 +9,7 @@ class StaticObject(pygame.sprite.Sprite):
         super(StaticObject, self).__init__()
 
         self.surf = pygame.Surface((width, height))
-        self.rect = self.surf.get_rect(x=y, y=x)
+        self.rect = self.surf.get_rect(x=x, y=y)
 
         self.interactive_border = pygame.Rect(self.rect.left - interactive_border_radius,
                                               self.rect.top - interactive_border_radius,
@@ -22,9 +22,20 @@ class StaticObject(pygame.sprite.Sprite):
 
 class Furnace(StaticObject):
 
-    def __init__(self):
-        super(Furnace, self).__init__(300, 300, 200, 200, 15)
-        self.surf.fill((255, 165, 0))
+    def __init__(self, width=200, height=200, x_pos=300, y_pos=300):
+        super(Furnace, self).__init__(x_pos, y_pos, width, height, 15)
+        # Set furnace image
+        self.idle = pygame.transform.scale(pygame.image.load("Sprites/furnace-idle.png"), (width, height))
+        self.idle = self.idle.convert()
+        self.idle.set_colorkey((0, 255, 0), RLEACCEL)
+
+        self.work = pygame.transform.scale(pygame.image.load("Sprites/furnace-running.png"), (width, height))
+        self.work = self.work.convert()
+        self.work.set_colorkey((0, 255, 0), RLEACCEL)
+
+        self.surf = self.idle
+
+        # Set furnace attributes
         self.inventory = None
         self.current_smelt = None
         self.finished = False
@@ -44,8 +55,8 @@ class Furnace(StaticObject):
                     self.current_smelt = recipe
                     break
 
-            # Update color
-            self.surf.fill((255, 0, 0))
+            # Update sprite
+            self.surf = self.work
 
         elif player.inventory is None and self.finished:
             # Player taking output from furnace
@@ -65,13 +76,13 @@ class Furnace(StaticObject):
                 self.current_smelt = None
                 self.finished = True
                 # Reset furnace color
-                self.surf.fill((255, 165, 0))
+                self.surf = self.idle
 
 
 class Hammer(StaticObject):
 
-    def __init__(self):
-        super(Hammer, self).__init__(500, 300, 200, 200, 15)
+    def __init__(self, width=200, height=200, x_pos=500, y_pos=500):
+        super(Hammer, self).__init__(x_pos, y_pos, width, height, 15)
         self.surf.fill((165, 165, 0))
         self.hammer_time = 0
         self.current_recipe = None

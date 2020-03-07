@@ -10,7 +10,9 @@ PLAYER_1_CONFIG = {
     "DOWN": pygame.K_DOWN,
     "LEFT": pygame.K_LEFT,
     "RIGHT": pygame.K_RIGHT,
-    "USE": pygame.K_RCTRL
+    "USE": pygame.K_RCTRL,
+    "IMG": "Sprites/graham-1.png",
+    "SPEED": 10
 }
 
 PLAYER_2_CONFIG = {
@@ -18,7 +20,13 @@ PLAYER_2_CONFIG = {
     "DOWN": pygame.K_s,
     "LEFT": pygame.K_a,
     "RIGHT": pygame.K_d,
-    "USE": pygame.K_LSHIFT
+    "USE": pygame.K_LSHIFT,
+    "IMG": "Sprites/graham-2.png",
+    "SPEED": 10
+}
+
+MAP_1 = {
+
 }
 
 SMELT_RECIPES = {

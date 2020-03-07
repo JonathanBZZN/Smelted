@@ -1,20 +1,27 @@
 import pygame
 from vector import Vector
 from math import sqrt
+from pygame.locals import RLEACCEL
 from config import *
 
 
 class Player(pygame.sprite.Sprite):
 
-    def __init__(self, controls):
+    def __init__(self, config):
         super(Player, self).__init__()
-        self.surf = pygame.Surface((50, 50))
-        self.surf.fill((0, 128, 255))
+        # Set player sprite
+        self.surf = pygame.transform.scale(pygame.image.load(config["IMG"]), (75, 100))
+        self.surf = self.surf.convert()
+        self.surf.set_colorkey((0, 255, 0), RLEACCEL)
+
+        # Set player boundaries
         self.rect = self.surf.get_rect()
         self.interactive_border = self.rect
+
+        # Init player attributes
         self.inventory = None
-        self.controls = controls
-        self.speed = 10
+        self.config = config
+        self.speed = config["SPEED"]
 
     def update(self, pressed, entities):
         # Remove self from entities
@@ -23,16 +30,16 @@ class Player(pygame.sprite.Sprite):
         y = 0
 
         # Check keys pressed
-        if pressed[self.controls["RIGHT"]]:
+        if pressed[self.config["RIGHT"]]:
             # Right pressed
             x += self.speed
-        if pressed[self.controls["LEFT"]]:
+        if pressed[self.config["LEFT"]]:
             # Left Pressed
             x -= self.speed
-        if pressed[self.controls["UP"]]:
+        if pressed[self.config["UP"]]:
             # Up pressed
             y -= self.speed
-        if pressed[self.controls["DOWN"]]:
+        if pressed[self.config["DOWN"]]:
             # Down pressed
             y += self.speed
 
@@ -48,7 +55,7 @@ class Player(pygame.sprite.Sprite):
 
     def entityInteraction(self, entities, pressed):
         for entity in entities:
-            if self.rect.colliderect(entity.interactive_border) and pressed[self.controls["USE"]]:
+            if self.rect.colliderect(entity.interactive_border) and pressed[self.config["USE"]]:
                 entity.interact(self)
 
     def entityCollision(self, entities, x, y):
