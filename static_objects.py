@@ -131,7 +131,7 @@ class Table(StaticObject):
 
         # Set table image
         self.surf = pygame.transform.scale(pygame.image.load("Sprites/table.png"), (width, height))
-        self.surf = self.idle.convert()
+        self.surf = self.surf.convert()
         self.surf.set_colorkey((0, 255, 0), RLEACCEL)
 
     def interact(self, player):
