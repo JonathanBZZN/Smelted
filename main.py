@@ -1,6 +1,5 @@
-import pygame
 from player import *
-from wall import *
+from StaticObjects.wall import *
 from conifg import *
 
 pygame.init()

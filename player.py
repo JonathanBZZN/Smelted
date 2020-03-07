@@ -12,8 +12,6 @@ class Player(pygame.sprite.Sprite):
         self.surf.fill((0, 128, 255))
         self.rect = self.surf.get_rect()
 
-        self.position = Vector(50, 50)
-
     def update(self, pressed, entities):
         x = 0
         y = 0
@@ -55,11 +53,11 @@ class Player(pygame.sprite.Sprite):
     def borderCollisionCheck(self):
 
         # Basic border collision detection
-        if self.position.x < 0:
-            self.position.x = 0
-        if self.position.x > SCREEN_WIDTH - 60 :# width: # TODO add player attributes width, height
-            self.position.x = SCREEN_WIDTH - 60
-        if self.position.y < 0:
-            self.position.y = 0
-        if self.position.y > SCREEN_HEIGHT - 60 :# height:
-            self.position.y = SCREEN_HEIGHT - 60
+        if self.rect.x < 0:
+            self.rect.x = 0
+        if self.rect.x > SCREEN_WIDTH - 60:# width: # TODO add player attributes width, height
+            self.rect.x = SCREEN_WIDTH - 60
+        if self.rect.y < 0:
+            self.rect.y = 0
+        if self.rect.y > SCREEN_HEIGHT - 60:# height:
+            self.rect.y = SCREEN_HEIGHT - 60
