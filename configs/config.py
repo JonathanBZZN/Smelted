@@ -33,6 +33,7 @@ MAP_1 = {
         Furnace: (500, 500),
         Grinder: (700, 500),
         Hammer: (300, 500),
+        Table: (700, 100),
         CollectionPoint: (Iron, 200, 200)
     },
 
