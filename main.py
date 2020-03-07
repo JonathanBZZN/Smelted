@@ -13,15 +13,8 @@ def run():
     all_sprites = pygame.sprite.Group()
     player1, player2, score, update = load_map(MAP_1, all_sprites)
 
-    score.add_item()
-    score.add_item()
-    score.add_item()
-    score.add_item()
-
     # init game clock
     clock = pygame.time.Clock()
-
-
 
     # Load background image
     background = pygame.image.load("Sprites/bg.png")

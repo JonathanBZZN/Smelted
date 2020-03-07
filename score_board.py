@@ -35,6 +35,18 @@ class ScoreBoard(StaticObject):
         # Loop through each item in order and reduce time
         self.update_times()
 
+        # Add an extra item
+        self.add_order()
+
+    def add_order(self):
+        # If no items add item
+        if len(self.order_list) == 0:
+            self.add_item()
+        else:
+            # Use randomness to add item
+            if random.random() > 0.99:
+                self.add_item()
+
     def update_times(self):
         # Create a list of all items which were failed to be made
         drop = []

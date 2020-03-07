@@ -42,5 +42,6 @@ MAP_1 = {
 
 END_POINTS = {
     Iron: (2000, 100, 10),
-    Steel: (2000, 200, 20)
+    Steel: (2000, 200, 20),
+    SharpBasicSword: (2000, 400, 20)
 }
