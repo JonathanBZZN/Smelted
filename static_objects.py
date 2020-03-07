@@ -186,7 +186,9 @@ class CollectionPoint(StaticObject):
 
     def __init__(self, output):
         super(CollectionPoint, self).__init__(800, 500, 100, 100, 15)
-        self.surf.fill((0, 0, 255))
+        self.surf = pygame.transform.scale(pygame.image.load("Sprites/collection.png"), (100, 100))
+        self.surf = self.surf.convert()
+        self.surf.set_colorkey((0, 255, 0), RLEACCEL)
         self.output = output
 
     def interact(self, player):
