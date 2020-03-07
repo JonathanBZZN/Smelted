@@ -22,6 +22,7 @@ def run():
     collect = CollectionPoint(Iron)
     grinder = Grinder()
     table = Table()
+    bin = Bin()
 
     # Init sprite groups
     all_sprites = pygame.sprite.Group()
@@ -34,6 +35,7 @@ def run():
     all_sprites.add(furnace)
     all_sprites.add(endPoint)
     all_sprites.add(table)
+    all_sprites.add(bin)
     score.add_item()
     score.add_item()
     score.add_item()
@@ -44,10 +46,13 @@ def run():
 
 
 
+    # Load background image
+    background = pygame.image.load("Sprites/bg.png")
+
     # game clock
     while not done:
         # Set screen background
-        screen.fill(BACKGROUND_COLOUR)
+        screen.blit(background, (0, 0))
 
         # Draw all sprites
         for entity in all_sprites:
