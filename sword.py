@@ -3,7 +3,13 @@ from pygame.locals import RLEACCEL
 from items import Item
 
 
-class BasicSword(Item):
+class Sword(Item):
+
+    def __init__(self, width, height):
+        super(Sword, self).__init__(width, height)
+
+
+class BasicSword(Sword):
 
     def __init__(self):
         super(BasicSword, self).__init__(50, 25)
