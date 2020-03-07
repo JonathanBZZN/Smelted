@@ -28,3 +28,7 @@ SMELT_RECIPES = {
 HAMMER_RECIPES = {
     BasicSword: (Steel, 60)
 }
+
+GRINDER_RECIPES = {
+    BasicSword: (BasicSword, 100)
+}

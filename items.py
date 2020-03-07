@@ -4,7 +4,7 @@ from pygame.locals import RLEACCEL
 
 class Item(pygame.sprite.Sprite):
 
-    def __init__(self, width, height, smeltable=False, hammerable=False):
+    def __init__(self, width, height, smeltable=False, hammerable=False, grindable=False):
         super(Item, self).__init__()
         self.surf = pygame.Surface((width, height))
         self.rect = self.surf.get_rect(x=0, y=0)
@@ -12,6 +12,7 @@ class Item(pygame.sprite.Sprite):
         # Smelting attributes
         self.smeltable = smeltable
         self.hammerable = hammerable
+        self.grindable = grindable
 
     def update(self, x, y, player_height, player_width):
         self.rect.x = x + (player_width / 2) - (self.surf.get_width() / 2)

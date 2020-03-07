@@ -61,7 +61,7 @@ class Furnace(StaticObject):
                 self.burn_time -= 1
             elif self.burn_time == 0:
                 # Produce output and reset furnace
-                self.inventory = self.current_smelt() # Inventory = a new object, which is output of smelt
+                self.inventory = self.current_smelt()  # Inventory = a new object, which is output of smelt
                 self.current_smelt = None
                 self.finished = True
                 # Reset furnace color
@@ -97,6 +97,38 @@ class Hammer(StaticObject):
                 player.inventory = self.current_recipe()
                 self.current_recipe = None
                 self.surf.fill((165, 165, 0))
+
+
+class Grinder(StaticObject):
+
+    def __init__(self):
+        super(Grinder, self).__init__(400, 800, 100, 100, 15)
+        self.surf.fill((255,0,255))
+        self.grind_time = 0
+        self.current_recipe = None
+
+    def interact(self, player):
+
+        if self.current_recipe is None and player.inventory is not None and player.inventory.grindable:
+            # Player has an item to grind
+            for recipe in GRINDER_RECIPES:
+                if isinstance(player.inventory, GRINDER_RECIPES[recipe][0]):
+                    self.grind_time = GRINDER_RECIPES[recipe][1]
+                    self.current_recipe = recipe
+                    player.inventory = None
+                    self.surf.fill((255, 0, 0))
+                    break
+
+        if self.current_recipe is not None and player.inventory is None:
+            if self.grind_time > 0:
+                # Player is grinding
+                self.grind_time -= 1
+            elif self.grind_time == 0:
+                # Player has finished grinding
+                player.inventory = self.current_recipe()
+                player.inventory.sharpen()
+                self.current_recipe = None
+                self.surf.fill((255,0,255))
 
 
 class CollectionPoint(StaticObject):

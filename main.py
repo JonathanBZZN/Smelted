@@ -16,6 +16,7 @@ wall = Wall()
 furnace = Furnace()
 Hammer = Hammer()
 collect = CollectionPoint(Iron)
+grinder = Grinder()
 
 # Init sprite groups
 all_sprites = pygame.sprite.Group()
@@ -25,6 +26,7 @@ all_sprites.add(furnace)
 all_sprites.add(wall)
 all_sprites.add(Hammer)
 all_sprites.add(collect)
+all_sprites.add(grinder)
 
 # init game clock
 clock = pygame.time.Clock()

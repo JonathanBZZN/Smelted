@@ -6,7 +6,7 @@ from items import Item
 class Sword(Item):
 
     def __init__(self, width, height):
-        super(Sword, self).__init__(width, height)
+        super(Sword, self).__init__(width, height, grindable=True)
 
     def sharpen(self):
         pass
@@ -30,3 +30,4 @@ class BasicSword(Sword):
         self.surf = self.surf_sharp
         self.sharpened = True
         self.surf.set_colorkey((0, 255, 0), RLEACCEL)
+        self.grindable = False
