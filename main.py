@@ -94,7 +94,7 @@ def load_map(map, all_sprites):
     all_sprites.add(end_point)
 
     # Add score to update
-    update = [score]
+    update = [score, end_point]
 
     # Load in all objects
     for item in map["OBJECTS"]:
