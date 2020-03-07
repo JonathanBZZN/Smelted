@@ -1,6 +1,6 @@
 import pygame
 from items import *
-from conifg import *
+from config import *
 
 
 class StaticObject(pygame.sprite.Sprite):
@@ -38,7 +38,7 @@ class Furnace(StaticObject):
 
             # Now check if the items match inputs to a recipe
             for recipe in SMELT_RECIPES:
-                if isinstance(self.inventory, SMELT_RECIPES[recipe][0]) and self.current_smelt != recipe:
+                if isinstance(self.inventory, SMELT_RECIPES[recipe][0]) and self.current_smelt is None:
                     # Start smelting
                     self.burn_time = SMELT_RECIPES[recipe][1]
                     self.current_smelt = recipe
@@ -48,6 +48,7 @@ class Furnace(StaticObject):
             self.surf.fill((255, 0, 0))
 
         elif player.inventory is None and self.finished:
+            # Player taking output from furnace
             self.finished = False
             player.inventory = self.inventory
             self.inventory = None
@@ -60,9 +61,10 @@ class Furnace(StaticObject):
                 self.burn_time -= 1
             elif self.burn_time == 0:
                 # Produce output and reset furnace
-                self.inventory = self.current_smelt()
+                self.inventory = self.current_smelt() # Inventory = a new object, which is output of smelt
                 self.current_smelt = None
                 self.finished = True
+                # Reset furnace color
                 self.surf.fill((255, 165, 0))
 
 
@@ -86,7 +88,7 @@ class Hammer(StaticObject):
                     self.surf.fill((255, 0, 0))
                     break
 
-        if self.current_recipe is not None:
+        if self.current_recipe is not None and player.inventory is None:
             # Player is hammering
             if self.hammer_time > 0:
                 self.hammer_time -= 1

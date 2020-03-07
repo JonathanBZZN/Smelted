@@ -1,6 +1,6 @@
 import pygame
 from items import *
-from sword import *
+from swords import *
 
 SCREEN_WIDTH = 1600
 SCREEN_HEIGHT = 900

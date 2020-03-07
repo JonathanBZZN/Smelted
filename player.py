@@ -1,7 +1,7 @@
 import pygame
 from vector import Vector
 from math import sqrt
-from conifg import *
+from config import *
 
 
 class Player(pygame.sprite.Sprite):

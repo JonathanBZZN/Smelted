@@ -1,7 +1,7 @@
 from player import *
 from static_objects import *
-from conifg import *
-from sword import *
+from config import *
+from swords import *
 
 pygame.init()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
