@@ -83,7 +83,7 @@ class Furnace(StaticObject):
 
 class Hammer(StaticObject):
 
-    def __init__(self,x_pos, y_pos, width=200, height=200):
+    def __init__(self, x_pos, y_pos, width=100, height=75):
         super(Hammer, self).__init__(x_pos, y_pos, width, height, 15)
         self.hammer_time = 0
         self.current_recipe = None

@@ -36,7 +36,7 @@ MAP_1 = {
         CollectionPoint: (Iron, 200, 200)
     },
 
-    "SUBMIT_POS": (300, 500),
+    "SUBMIT_POS": (300, 300),
     "TIME_LIMIT": 10000,
 }
 
