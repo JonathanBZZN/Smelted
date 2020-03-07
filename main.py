@@ -46,6 +46,7 @@ while not done:
     # Update players
     pressed = pygame.key.get_pressed()
     player.update(pressed, all_sprites)
+    furnace.update()
 
     pygame.display.flip()
     clock.tick(60)

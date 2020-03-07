@@ -24,6 +24,32 @@ class Furnace(StaticObject):
     def __init__(self):
         super(Furnace, self).__init__(300, 300, 200, 200, 15)
         self.surf.fill((255, 165, 0))
+        self.inventory = None
+        self.finished = False
+        self.burnTime = 0
+
+    def interact(self, player):
+        if isinstance(player.inventory, Smeltable) and self.inventory is None:
+            # Update the inventories
+            self.inventory = player.inventory
+            player.inventory = None
+
+            # Set the furnace to burning
+            self.surf.fill((255, 0, 0))
+            self.burnTime = self.inventory.smelt_time
+        elif player.inventory is None and self.finished:
+            self.finished = False
+            player.inventory = self.inventory
+            self.inventory = None
+
+    def update(self):
+        if self.burnTime > 0:
+            self.burnTime -= 1
+
+        if self.burnTime == 0 and self.inventory is not None and not self.finished:
+            self.surf.fill((255, 165, 0))
+            self.inventory = self.inventory.output
+            self.finished = True
 
 
 class CollectionPoint(StaticObject):
