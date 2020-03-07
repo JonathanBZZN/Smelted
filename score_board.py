@@ -7,7 +7,7 @@ class ScoreBoard(StaticObject):
 
     def __init__(self):
         super(ScoreBoard, self).__init__(SCREEN_WIDTH - 400, 0, 400, SCREEN_HEIGHT)
-        self.surf.fill((100, 0, 200))
+        self.surf.fill((232, 135, 62))
         self.score = 0
         self.order_list = []
         self.print_inventory = True
@@ -25,6 +25,7 @@ class ScoreBoard(StaticObject):
 
     def update(self):
         # Loop through each item in order and reduce time
+        print(self.score)
         self.update_times()
 
     def update_times(self):
@@ -41,7 +42,7 @@ class ScoreBoard(StaticObject):
         for item in drop:
             # Remove the score for each failure
             self.order_list.remove(item)
-            self.score -= item.fail_score()
+            self.score -= item.fail_score
 
     def print(self, screen):
         # Loop through each item in inventory and print
@@ -49,15 +50,17 @@ class ScoreBoard(StaticObject):
 
         for item in self.order_list:
             # Update y component
-            y += 50
+            y += item.print_item.surf.get_height() + 20
 
             # Check if y is out of bounds
             if y > self.surf.get_height() - 50:
                 break
             # Else print item
             item = item.print_item
-            item.update(self.rect.x, y, self.surf.get_height(), self.surf.get_width())
+            item.update(self.rect.x - (self.surf.get_width() / 2) + 50, y, self.surf.get_height(), self.surf.get_width())
             screen.blit(item.surf, item.rect)
+
+            # Print time remaining
 
 
 class EndPoint(StaticObject):
@@ -69,14 +72,28 @@ class EndPoint(StaticObject):
         self.score_board = score_board
 
     def interact(self, player):
-        if player.inventory is not None and any(isinstance(player.inventory, x.object) for x in self.score_board.order_list):
-            player.inventory = None
+        if player.inventory is not None:
+            # Loop through each element in order_list
+            # Set item to remove if order completed
+            item_drop = None
+            for item in self.score_board.order_list:
+                if isinstance(player.inventory, item.object):
+                    # Completed goal so add score and remove item from order
+                    player.inventory = None
+                    self.score_board.score += item.succeed_score
+                    item_drop = item
+                    break
+
+            # Update order list if needed
+            if item_drop is not None:
+                self.score_board.order_list.remove(item_drop)
 
 
 class Expected:
 
     def __init__(self, time, object, fail_score, succeed_score):
         self.time = time
+        self.start_time = time
         self.object = object
         self.print_item = object()
         self.fail_score = fail_score

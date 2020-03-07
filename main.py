@@ -63,7 +63,7 @@ while not done:
     pressed = pygame.key.get_pressed()
     player1.update(pressed, all_sprites)
     player2.update(pressed, all_sprites)
-    furnace.update()
+    score.update()
 
     pygame.display.flip()
     clock.tick(60)
