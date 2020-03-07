@@ -5,13 +5,25 @@ from swords import *
 
 
 def run():
+    # Init screen and pygame
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+
+    # run each map
+    run_map(MAP_1, screen)
+
+    # Clean up
+    pygame.quit()
+    quit()
+
+
+def run_map(map, screen):
     done = False
+    map_time = map["TIME_LIMIT"]
 
     # Load map
     all_sprites = pygame.sprite.Group()
-    player1, player2, score, update = load_map(MAP_1, all_sprites)
+    player1, player2, score, update = load_map(map, all_sprites)
 
     # init game clock
     clock = pygame.time.Clock()
@@ -22,6 +34,7 @@ def run():
     # game clock
     while not done:
         # Set screen background
+        map_time -= 1
         screen.blit(background, (0, 0))
 
         # Draw all sprites
@@ -55,9 +68,9 @@ def run():
         pygame.display.flip()
         clock.tick(60)
 
-    # Clean up
-    pygame.quit()
-    quit()
+        # Check if done
+        if map_time <= 0:
+            done = True
 
 
 def load_map(map, all_sprites):
