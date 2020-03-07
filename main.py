@@ -34,7 +34,7 @@ clock = pygame.time.Clock()
 # game clock
 while not done:
     # Set screen background
-    screen.fill((255, 255, 255))
+    screen.fill(BACKGROUND_COLOUR)
 
     # Draw all sprites
     for entity in all_sprites:

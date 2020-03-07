@@ -5,6 +5,8 @@ from swords import *
 SCREEN_WIDTH = 1600
 SCREEN_HEIGHT = 900
 
+BACKGROUND_COLOUR = (255, 255, 255)
+
 PLAYER_1_CONFIG = {
     "UP": pygame.K_UP,
     "DOWN": pygame.K_DOWN,
