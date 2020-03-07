@@ -46,10 +46,13 @@ def run():
     pygame.mixer.music.load("Music/ingame.mp3")
     pygame.mixer.music.play(-1)
 
+    # Load background image
+    background = pygame.image.load("Sprites/bg.png")
+
     # game clock
     while not done:
         # Set screen background
-        screen.fill(BACKGROUND_COLOUR)
+        screen.blit(background, (0, 0))
 
         # Draw all sprites
         for entity in all_sprites:
