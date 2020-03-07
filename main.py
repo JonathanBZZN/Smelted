@@ -20,6 +20,7 @@ endPoint = EndPoint(score)
 collect = CollectionPoint(Iron)
 grinder = Grinder()
 bin = Bin()
+table = Table()
 
 # Init sprite groups
 all_sprites = pygame.sprite.Group()
@@ -32,6 +33,7 @@ all_sprites.add(grinder)
 all_sprites.add(furnace)
 all_sprites.add(endPoint)
 all_sprites.add(bin)
+all_sprites.add(table)
 score.add_item()
 score.add_item()
 score.add_item()
@@ -39,6 +41,10 @@ score.add_item()
 
 # init game clock
 clock = pygame.time.Clock()
+
+# start music
+pygame.mixer.music.load("Music/ingame.mp3")
+pygame.mixer.music.play(-1)
 
 # game clock
 while not done:
