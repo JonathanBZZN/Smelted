@@ -143,6 +143,16 @@ class CollectionPoint(StaticObject):
             player.inventory = self.output()
 
 
+class Bin(StaticObject):
+
+    def __init__(self):
+        super(Bin, self).__init__(800, 800, 50, 50, 15)
+        self.surf.fill((0, 0, 0))
+
+    def interact(self, player):
+        player.inventory = None
+
+
 class Wall(StaticObject):
 
     def __init__(self):
