@@ -33,6 +33,17 @@ class Player(pygame.sprite.Sprite):
             y += 5
 
         # Entity collision
+        self.entityCollision(entities, x, y)
+        self.borderCollisionCheck()
+        self.entityInteraction(entities)
+        entities.add(self)
+
+    def entityInteraction(self, entities):
+        for entity in entities:
+            if self.rect.colliderect(entity.interactive_border):
+                print("Test")
+
+    def entityCollision(self, entities, x, y):
         old_x = self.rect.x
         new_x = self.rect.x + x
         old_y = self.rect.y
@@ -48,10 +59,6 @@ class Player(pygame.sprite.Sprite):
         if pygame.sprite.spritecollide(self, entities, False):
             # Changing y caused collision
             self.rect.y = old_y
-
-        # Border collision
-        self.borderCollisionCheck()
-        entities.add(self)
 
     def borderCollisionCheck(self):
 
