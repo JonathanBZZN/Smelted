@@ -30,7 +30,7 @@ def run_map(map, screen):
     clock = pygame.time.Clock()
 
     # Load background image
-    background = pygame.image.load("Sprites/bg.png")
+    background = pygame.image.load("Sprites/floor.png")
 
     # game clock
     while not done:
