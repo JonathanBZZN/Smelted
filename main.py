@@ -15,6 +15,7 @@ player2.rect.x = 200
 wall = Wall()
 furnace = Furnace()
 Hammer = Hammer()
+endPoint = EndPoint()
 collect = CollectionPoint(Iron)
 grinder = Grinder()
 
@@ -27,6 +28,7 @@ all_sprites.add(wall)
 all_sprites.add(Hammer)
 all_sprites.add(collect)
 all_sprites.add(grinder)
+all_sprites.add(endPoint)
 
 # init game clock
 clock = pygame.time.Clock()

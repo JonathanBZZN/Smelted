@@ -126,9 +126,20 @@ class Grinder(StaticObject):
             elif self.grind_time == 0:
                 # Player has finished grinding
                 player.inventory = self.current_recipe()
-                player.inventory.sharpen()
                 self.current_recipe = None
                 self.surf.fill((255,0,255))
+
+
+class EndPoint(StaticObject):
+
+    def __init__(self):
+        super(EndPoint, self).__init__(400, 300, 200, 200, 15)
+        self.surf.fill((0, 125, 69))
+        self.inventory = []
+
+    def interact(self, player):
+        if player.inventory is not None and any(isinstance(player.inventory, x) for x in END_POINTS):
+            player.inventory = None
 
 
 class CollectionPoint(StaticObject):

@@ -32,5 +32,9 @@ HAMMER_RECIPES = {
 }
 
 GRINDER_RECIPES = {
-    BasicSword: (BasicSword, 100)
+    SharpBasicSword: (BasicSword, 100)
 }
+
+END_POINTS = [
+    SharpBasicSword
+]

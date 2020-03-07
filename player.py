@@ -73,9 +73,9 @@ class Player(pygame.sprite.Sprite):
         # Basic border collision detection
         if self.rect.x < 0:
             self.rect.x = 0
-        if self.rect.x > SCREEN_WIDTH - 60:# width: # TODO add player attributes width, height
-            self.rect.x = SCREEN_WIDTH - 60
+        if self.rect.x > SCREEN_WIDTH - 50:# width: # TODO add player attributes width, height
+            self.rect.x = SCREEN_WIDTH - 50
         if self.rect.y < 0:
             self.rect.y = 0
-        if self.rect.y > SCREEN_HEIGHT - 60:# height:
-            self.rect.y = SCREEN_HEIGHT - 60
+        if self.rect.y > SCREEN_HEIGHT - 50:# height:
+            self.rect.y = SCREEN_HEIGHT - 50
