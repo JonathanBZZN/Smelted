@@ -14,6 +14,7 @@ player2.rect.x = 200
 
 furnace = Furnace()
 Hammer = Hammer()
+score = ScoreBoard()
 collect = CollectionPoint(Iron)
 grinder = Grinder()
 
@@ -24,6 +25,7 @@ all_sprites.add(player2)
 all_sprites.add(furnace)
 all_sprites.add(Hammer)
 all_sprites.add(collect)
+all_sprites.add(score)
 all_sprites.add(grinder)
 
 # init game clock

@@ -164,6 +164,13 @@ class Bin(StaticObject):
         player.inventory = None
 
 
+class ScoreBoard(StaticObject):
+
+    def __init__(self):
+        super(ScoreBoard, self).__init__(SCREEN_WIDTH - 400, 0, 400, 200)
+        self.surf.fill((100, 0, 200))
+
+
 class Wall(StaticObject):
 
     def __init__(self):
