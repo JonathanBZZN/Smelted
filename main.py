@@ -14,11 +14,12 @@ player2 = Player(PLAYER_2_CONFIG)
 player2.rect.x = 200
 
 furnace = Furnace()
-Hammer = Hammer()
+hammer = Hammer()
 score = ScoreBoard()
 endPoint = EndPoint(score)
 collect = CollectionPoint(Iron)
 grinder = Grinder()
+table = Table()
 
 # Init sprite groups
 all_sprites = pygame.sprite.Group()
@@ -26,7 +27,11 @@ all_sprites.add(player1)
 all_sprites.add(player2)
 all_sprites.add(collect)
 all_sprites.add(score)
+all_sprites.add(hammer)
+all_sprites.add(grinder)
+all_sprites.add(furnace)
 all_sprites.add(endPoint)
+all_sprites.add(table)
 score.add_item()
 score.add_item()
 score.add_item()
@@ -67,6 +72,7 @@ while not done:
     pressed = pygame.key.get_pressed()
     player1.update(pressed, all_sprites)
     player2.update(pressed, all_sprites)
+    score.update()
     furnace.update()
 
     pygame.display.flip()

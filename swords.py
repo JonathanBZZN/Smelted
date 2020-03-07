@@ -32,3 +32,4 @@ class SharpBasicSword(Sword):
         self.surf = self.surf.convert()
         self.rect = self.surf.get_rect()
         self.surf.set_colorkey((0, 255, 0), RLEACCEL)
+

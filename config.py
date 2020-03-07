@@ -44,5 +44,6 @@ GRINDER_RECIPES = {
 }
 
 END_POINTS = {
-    Iron: (2000, 100, 10)
+    Iron: (2000, 100, 10),
+    Steel: (2000, 200, 20)
 }
