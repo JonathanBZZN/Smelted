@@ -77,8 +77,8 @@ class ScoreBoard(StaticObject):
 
 class EndPoint(StaticObject):
 
-    def __init__(self, score_board):
-        super(EndPoint, self).__init__(400, 300, 200, 200, 15)
+    def __init__(self, score_board, x_pos, y_pos):
+        super(EndPoint, self).__init__(x_pos, y_pos, 200, 200, 15)
         self.surf.fill((0, 125, 69))
         self.inventory = []
         self.score_board = score_board

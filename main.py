@@ -10,30 +10,10 @@ def run():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     done = False
 
-    # init player
-    player1 = Player(PLAYER_1_CONFIG)
-    player2 = Player(PLAYER_2_CONFIG)
-    player2.rect.x = 200
-
-    furnace = Furnace()
-    hammer = Hammer()
-    score = ScoreBoard()
-    endPoint = EndPoint(score)
-    collect = CollectionPoint(Iron)
-    grinder = Grinder()
-    table = Table()
-
-    # Init sprite groups
+    # Load map
     all_sprites = pygame.sprite.Group()
-    all_sprites.add(player1)
-    all_sprites.add(player2)
-    all_sprites.add(collect)
-    all_sprites.add(score)
-    all_sprites.add(hammer)
-    all_sprites.add(grinder)
-    all_sprites.add(furnace)
-    all_sprites.add(endPoint)
-    all_sprites.add(table)
+    player1, player2, score, update = load_map(MAP_1, all_sprites)
+
     score.add_item()
     score.add_item()
     score.add_item()
@@ -77,8 +57,10 @@ def run():
         pressed = pygame.key.get_pressed()
         player1.update(pressed, all_sprites)
         player2.update(pressed, all_sprites)
-        score.update()
-        furnace.update()
+
+        # Update all objects that need to be updated
+        for entity in update:
+            entity.update()
 
         pygame.display.flip()
         clock.tick(60)
@@ -86,3 +68,36 @@ def run():
     # Clean up
     pygame.quit()
     quit()
+
+
+def load_map(map, all_sprites):
+    # First load in the player 1 and  2 position
+    player1 = Player(PLAYER_1_CONFIG, map["PLAYER_1_POS"][0], map["PLAYER_1_POS"][1])
+    player2 = Player(PLAYER_2_CONFIG, map["PLAYER_2_POS"][0], map["PLAYER_2_POS"][1])
+
+    # Update all_sprites to contain both players
+    all_sprites.add(player1)
+    all_sprites.add(player2)
+
+    # Add score board
+    score = ScoreBoard()
+    all_sprites.add(score)
+
+    # Add the submit object
+    end_point = EndPoint(score, map["SUBMIT_POS"][0], map["SUBMIT_POS"][1])
+    all_sprites.add(end_point)
+
+    # Add score to update
+    update = [score]
+
+    # Load in all objects
+    for item in map["OBJECTS"]:
+        # Create this object and add to all_sprites
+        item_instance = item(*map["OBJECTS"][item])
+        all_sprites.add(item_instance)
+
+        # If item instance of furnace add to update
+        if isinstance(item_instance, Furnace):
+            update.append(item_instance)
+
+    return player1, player2, score, update

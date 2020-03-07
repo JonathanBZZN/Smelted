@@ -1,6 +1,7 @@
 import pygame
 from items import *
 from swords import *
+from static_objects import *
 
 SCREEN_WIDTH = 1600
 SCREEN_HEIGHT = 900
@@ -28,7 +29,16 @@ PLAYER_2_CONFIG = {
 }
 
 MAP_1 = {
+    "PLAYER_1_POS": (100, 100),
+    "PLAYER_2_POS": (200, 200),
 
+    "OBJECTS": {
+        Furnace: (500, 500),
+        CollectionPoint: (Iron, 200, 200)
+    },
+
+    "SUBMIT_POS": (300, 500),
+    "TIME_LIMIT": 10000,
 }
 
 SMELT_RECIPES = {
