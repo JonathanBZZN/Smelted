@@ -17,7 +17,7 @@ class Item(pygame.sprite.Sprite):
     def update(self, x, y, player_height, player_width):
         self.rect.x = x + (player_width / 2) - (self.surf.get_width() / 2)
         self.rect.y = y - (self.surf.get_height())
-HotPlat
+
 
 class Iron(Item):
 
