@@ -44,9 +44,9 @@ class ScoreBoard(StaticObject):
         # If no items add item
         if len(self.order_list) == 0:
             self.add_item()
-        else:
+        elif len(self.order_list) < 10:
             # Use randomness to add item
-            if random.random() > 0.99:
+            if random.random() > DIFFICULTY:
                 self.add_item()
 
     def update_times(self):
