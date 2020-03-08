@@ -16,8 +16,10 @@ class ScoreBoard(StaticObject):
 
         # Score board attributes
         self.score = 0
+        self.difficulty = 0.99
         self.set_score()
         self.order_list = []
+        self.end_points = None
         self.print_inventory = True
 
     def set_score(self):
@@ -27,10 +29,10 @@ class ScoreBoard(StaticObject):
 
     def add_item(self):
         # Pick a random item from the end points and add to list
-        item = random.choice(list(END_POINTS.keys()))
+        item = random.choice(list(self.end_points.keys()))
 
         # Convert item to an Expected
-        item_e = Expected(END_POINTS[item][0], item, succeed_score=END_POINTS[item][1], fail_score=END_POINTS[item][2])
+        item_e = Expected(self.end_points[item][0], item, succeed_score=self.end_points[item][1], fail_score=self.end_points[item][2])
         self.order_list.append(item_e)
 
     def update(self):
@@ -46,7 +48,7 @@ class ScoreBoard(StaticObject):
             self.add_item()
         elif len(self.order_list) < 10:
             # Use randomness to add item
-            if random.random() > DIFFICULTY:
+            if random.random() > self.difficulty:
                 self.add_item()
 
     def update_times(self):
@@ -111,7 +113,7 @@ def DrawBar(pos, size, border_c, progress, screen):
     elif progress < 0.75:
         bar_c = (128, 128, 0)
 
-    # Draw the progess bar
+    # Draw the progress bar
     pygame.draw.rect(screen, border_c, (*pos, *size), 5)
     inner_pos = (pos[0]+3, pos[1]+3)
     inner_size = ((size[0]-6) * progress, size[1]-6)
@@ -137,6 +139,8 @@ class EndPoint(StaticObject):
 
         self.surf = self.idle
 
+        self.effect = pygame.mixer.Sound("Sounds/NomNomNom.wav")
+
         self.counter = 0
 
     def interact(self, player):
@@ -147,6 +151,7 @@ class EndPoint(StaticObject):
             for item in self.score_board.order_list:
                 if isinstance(player.inventory, item.object):
                     # Completed goal so add score and remove item from order
+                    self.effect.play()
                     self.surf = self.active
                     self.counter = 20
                     player.inventory = None
