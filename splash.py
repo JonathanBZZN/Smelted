@@ -18,7 +18,7 @@ menuElements = ["Sprites/menu_art.png", "Sprites/menu_art_small_button.png", "Sp
 
 
 def text_objects(text, color):
-    textSurface = pygame.font.Font("freesansbold.ttf", 60).render(
+    textSurface = pygame.font.SysFont("comicsansms", 60).render(
         text, True, color
         )
     return textSurface, textSurface.get_rect()
