@@ -41,9 +41,6 @@ MAP_1 = {
     "TIME_LIMIT": 60*20,
 }
 
-MAP_1["OBJECTS"].extend([(Wall, (1100, x)) for x in range(0, 900, 100)])
-
-
 MAP_2 = {
     "PLAYER_1_POS": (275, 450),
     "PLAYER_2_POS": (775, 450),
@@ -70,7 +67,7 @@ MAP_2["OBJECTS"].extend([(Wall, (550, 0 + x)) for x in range(0, 300, 100)])
 MAP_2["OBJECTS"].extend([(Wall, (0 + x, 800)) for x in range(0, 1200, 100)])
 MAP_2["OBJECTS"].extend([(Wall, (0 + x, 0)) for x in range(0, 1200, 100)])
 
-MAPS = [MAP_2]
+MAPS = [MAP_1, MAP_2]
 
 END_POINTS = {
     Iron: (2000, 100, 10),
