@@ -37,3 +37,43 @@ class Steel(Item):
         self.surf = self.surf.convert()
         self.rect = self.surf.get_rect()
         self.surf.set_colorkey((0, 255, 0), RLEACCEL)
+
+
+class GoldIngot(Item):
+
+    def __init__(self):
+        super(GoldIngot, self).__init__(50, 25, smeltable=True)
+        self.surf = pygame.transform.scale(pygame.image.load("Sprites/gold-ore.png"), (50, 37))
+        self.surf = self.surf.convert()
+        self.rect = self.surf.get_rect()
+        self.surf.set_colorkey((0, 255, 0), RLEACCEL)
+
+
+class HotGold(Item):
+
+    def __init__(self):
+        super(HotGold, self).__init__(50, 25, hammerable=True)
+        self.surf = pygame.transform.scale(pygame.image.load("Sprites/hot-gold.png"), (50, 37))
+        self.surf = self.surf.convert()
+        self.rect = self.surf.get_rect()
+        self.surf.set_colorkey((0, 255, 0), RLEACCEL)
+
+
+class PlatIngot(Item):
+
+    def __init__(self):
+        super(PlatIngot, self).__init__(50, 25, smeltable=True)
+        self.surf = pygame.transform.scale(pygame.image.load("Sprites/plat-ore.png"), (50, 37))
+        self.surf = self.surf.convert()
+        self.rect = self.surf.get_rect()
+        self.surf.set_colorkey((0, 255, 0), RLEACCEL)
+
+
+class HotPlat(Item):
+
+    def __init__(self):
+        super(HotPlat, self).__init__(50, 25, hammerable=True)
+        self.surf = pygame.transform.scale(pygame.image.load("Sprites/hot-plat.png"), (50, 37))
+        self.surf = self.surf.convert()
+        self.rect = self.surf.get_rect()
+        self.surf.set_colorkey((0, 255, 0), RLEACCEL)

@@ -56,7 +56,8 @@ MAP_2 = {
         (Furnace, (325,100, 225, 200)),
         (Grinder, (875, 600, 225, 200)),
         (Hammer, (650, 600, 225, 200)),
-        (CollectionPoint, (Iron, 250, 700))
+        (CollectionPoint, (Iron, 250, 700)),
+        (CollectionPoint, (PlatIngot, 150, 700))
     ],
 
     "SUBMIT_POS": (900, 110),
