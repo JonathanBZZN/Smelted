@@ -17,7 +17,7 @@ class Item(pygame.sprite.Sprite):
     def update(self, x, y, player_height, player_width):
         self.rect.x = x + (player_width / 2) - (self.surf.get_width() / 2)
         self.rect.y = y - (self.surf.get_height())
-
+HotPlat
 
 class Iron(Item):
 
@@ -27,6 +27,9 @@ class Iron(Item):
         self.surf = self.surf.convert()
         self.rect = self.surf.get_rect()
         self.surf.set_colorkey((0, 255, 0), RLEACCEL)
+
+    def __str__(self):
+        return "Iron"
 
 
 class Steel(Item):
@@ -38,6 +41,19 @@ class Steel(Item):
         self.rect = self.surf.get_rect()
         self.surf.set_colorkey((0, 255, 0), RLEACCEL)
 
+
+    def __str__(self):
+        return "Steel"
+
+
+class BigSteel(Item):
+
+    def __init__(self):
+        super(BigSteel, self).__init__(50, 25, hammerable=True)
+        self.surf = pygame.transform.scale(pygame.image.load("Sprites/table.png"), (50, 37))
+    
+    def __str__(self):
+        return "BigSteel"
 
 class GoldIngot(Item):
 
@@ -54,10 +70,11 @@ class HotGold(Item):
     def __init__(self):
         super(HotGold, self).__init__(50, 25, hammerable=True)
         self.surf = pygame.transform.scale(pygame.image.load("Sprites/hot-gold.png"), (50, 37))
+
         self.surf = self.surf.convert()
         self.rect = self.surf.get_rect()
         self.surf.set_colorkey((0, 255, 0), RLEACCEL)
-
+        
 
 class PlatIngot(Item):
 
@@ -77,3 +94,4 @@ class HotPlat(Item):
         self.surf = self.surf.convert()
         self.rect = self.surf.get_rect()
         self.surf.set_colorkey((0, 255, 0), RLEACCEL)
+
