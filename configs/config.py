@@ -45,7 +45,8 @@ MAP_1 = {
 
     "OBJECTS": [
         (Furnace, (400, 350, 225, 200)),
-        (CollectionPoint, (Iron, 100, 400))
+        (CollectionPoint, (Iron, 100, 400)),
+        (Bin, (1000, 600, 100, 100))
     ],
 
     "SUBMIT_POS": (900, 350),
