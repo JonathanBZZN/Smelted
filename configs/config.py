@@ -55,6 +55,7 @@ MAP_1 = {
 
     "END_POINTS": {
         Steel: (1000, 200, 10),
+        BigSteel: (1500, 400, 100)
     },
 
     "DIFFICULTY": 0.999
