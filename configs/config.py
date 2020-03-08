@@ -26,8 +26,8 @@ PLAYER_2_CONFIG = {
 }
 
 MAP_1 = {
-    "PLAYER_1_POS": (100, 100),
-    "PLAYER_2_POS": (100, 200),
+    "PLAYER_1_POS": (100, 200),
+    "PLAYER_2_POS": (100, 600),
 
     "OBJECTS": [
         (Furnace, (400, 350, 225, 200)),
@@ -43,6 +43,15 @@ MAP_1 = {
 
     "DIFFICULTY": 0.999
 }
+
+MAP_1["OBJECTS"].extend([(Wall, (0, x)) for x in range(0, 900, 100)])
+MAP_1["OBJECTS"].extend([(Wall, (1100, x)) for x in range(0, 900, 100)])
+# MAP_1["OBJECTS"].extend([(Wall, (550, 700 + x)) for x in range(0, 100, 100)])
+# MAP_1["OBJECTS"].extend([(Wall, (550, 0 + x)) for x in range(0, 200, 100)])
+MAP_1["OBJECTS"].extend([(Wall, (0 + x, 800)) for x in range(0, 1200, 100)])
+MAP_1["OBJECTS"].extend([(Wall, (0 + x, 0)) for x in range(0, 1200, 100)])
+MAP_1["OBJECTS"].extend([(Wall, (0 + x, 700)) for x in range(0, 1200, 100)])
+MAP_1["OBJECTS"].extend([(Wall, (0 + x, 100)) for x in range(0, 1200, 100)])
 
 MAP_2 = {
     "PLAYER_1_POS": (275, 450),
