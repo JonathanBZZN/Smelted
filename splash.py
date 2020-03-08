@@ -66,6 +66,7 @@ def game_intro():
         if (width/2 - 110) > mouse[0] > (width/2 - 410) and height/2 + 170 > mouse[1] > height/2 + 30:
             textStart, textStartrect = text_objects("Start!", white)
             if click[0] == 1:
+                introPage()
                 gameplay()
 
 
@@ -93,6 +94,23 @@ def game_intro():
         textQuitrect.center = (width/2 + 260, height/2 + 100)
         screen.blit(textQuit, textQuitrect)
 
+        pygame.display.flip()
+        clock.tick(60)
+
+
+def introPage():
+    infoAsset = pygame.image.load("Sprites/tempBG.png")
+    done = False
+    while not done:
+        screen.blit(infoAsset, (0, 0))
+        # Loop through every event in the queue
+        for event in pygame.event.get():
+            # Quiting
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+            if event.type == pygame.KEYDOWN:
+                done = True
         pygame.display.flip()
         clock.tick(60)
 
