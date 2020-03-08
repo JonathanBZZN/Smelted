@@ -4,7 +4,7 @@ from swords import *
 SMELT_RECIPES = {
 
     Steel: ([Iron], 200),
-    BigSteel: ([Iron, Iron], 150)
+    BigSteel: ([Iron, Iron], 150),
     HotGold: ([GoldIngot], 140),
     HotPlat: ([PlatIngot], 160)
 
