@@ -18,6 +18,7 @@ class Player(pygame.sprite.Sprite):
 
         # Init player attributes
         self.inventory = None
+        self.interacted = False
         self.config = config
         self.speed = config["SPEED"]
 
@@ -52,8 +53,15 @@ class Player(pygame.sprite.Sprite):
             self.inventory.update(self.rect.x, self.rect.y, self.surf.get_height(), self.surf.get_width())
 
     def entityInteraction(self, entities, pressed):
+        # First check if the player can interact
+        if self.interacted and not pressed[self.config["USE"]]:
+            self.interacted = False
+
         for entity in entities:
             if self.rect.colliderect(entity.interactive_border) and pressed[self.config["USE"]]:
+                if self.interacted:
+                    break
+
                 entity.interact(self)
 
     def entityCollision(self, entities, x, y):

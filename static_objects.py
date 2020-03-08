@@ -142,11 +142,13 @@ class Table(StaticObject):
         if player.inventory is not None and self.inventory is None:
             self.inventory = player.inventory
             player.inventory = None
-            self.interact_cooldown = 7
+            player.interacted = True
+            self.interact_cooldown = 10
         elif player.inventory is None and self.inventory is not None:
             player.inventory = self.inventory
+            player.interacted = True
             self.inventory = None
-            self.interact_cooldown = 7
+            self.interact_cooldown = 10
 
     def print(self, screen):
         if self.inventory is not None:
