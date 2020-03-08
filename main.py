@@ -104,7 +104,8 @@ def run_continue(screen, check):
     clock = pygame.time.Clock()
 
     # Load continue assets
-    screen.fill(black)
+    bg = pygame.image.load("Sprites/floor.png")
+    screen.blit(bg, (0, 0))
     if check:
         textBox = pygame.image.load("Sprites/continueDialogue.png")
     else:
