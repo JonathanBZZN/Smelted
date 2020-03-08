@@ -229,6 +229,9 @@ class Bin(StaticObject):
 
 class Wall(StaticObject):
 
-    def __init__(self, x_pos, y_pos, width=50, height=50):
+    def __init__(self, x_pos, y_pos, width=100, height=100):
         super(Wall, self).__init__(x_pos, y_pos, width, height)
-        self.surf.fill((169, 169, 169))
+        # Set table image
+        self.surf = pygame.transform.scale(pygame.image.load("Sprites/wall.png"), (width, height))
+        self.surf = self.surf.convert()
+        self.surf.set_colorkey((0, 255, 0), RLEACCEL)
