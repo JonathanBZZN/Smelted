@@ -18,6 +18,7 @@ class ScoreBoard(StaticObject):
         self.score = 0
         self.set_score()
         self.order_list = []
+        self.end_points = None
         self.print_inventory = True
 
     def set_score(self):
@@ -27,10 +28,10 @@ class ScoreBoard(StaticObject):
 
     def add_item(self):
         # Pick a random item from the end points and add to list
-        item = random.choice(list(END_POINTS.keys()))
+        item = random.choice(list(self.end_points.keys()))
 
         # Convert item to an Expected
-        item_e = Expected(END_POINTS[item][0], item, succeed_score=END_POINTS[item][1], fail_score=END_POINTS[item][2])
+        item_e = Expected(self.end_points[item][0], item, succeed_score=self.end_points[item][1], fail_score=self.end_points[item][2])
         self.order_list.append(item_e)
 
     def update(self):
