@@ -10,11 +10,13 @@ SCORE = 0
 black = 0, 0, 0
 white = 255, 255, 255
 
+
 def text_objects(text, color):
     textSurface = pygame.font.SysFont("comicsansms", 60).render(
         text, True, color
         )
     return textSurface, textSurface.get_rect()
+
 
 def run():
     # Init screen and pygame
@@ -22,9 +24,10 @@ def run():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
     # run each map
-    for MAP in MAPS:
+    for idx, MAP in enumerate(MAPS):
         run_map(MAP, screen)
-        run_continue(screen, True)
+        if (idx != len(MAPS) - 1):
+            run_continue(screen, True)
 
     run_continue(screen, False)
 
@@ -72,7 +75,8 @@ def run_map(map, screen):
         for event in pygame.event.get():
             # Quiting
             if event.type == pygame.QUIT:
-                done = True
+                pygame.quit()
+                quit()
 
         # Update players
         pressed = pygame.key.get_pressed()
@@ -89,6 +93,10 @@ def run_map(map, screen):
         # Check if done
         if map_time <= 0:
             done = True
+
+    global SCORE
+    SCORE = SCORE + score.score
+
 
 def run_continue(screen, check):
     done = False
@@ -113,7 +121,8 @@ def run_continue(screen, check):
         for event in pygame.event.get():
             # Quiting
             if event.type == pygame.QUIT:
-                done = True
+                pygame.quit()
+                quit()
 
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()

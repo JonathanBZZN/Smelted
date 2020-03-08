@@ -66,7 +66,7 @@ MAP_2 = {
     "TIME_LIMIT": 60*20,
 }
 
-MAPS = [MAP_2]
+MAPS = [MAP_1, MAP_2]
 
 END_POINTS = {
     Iron: (2000, 100, 10),
