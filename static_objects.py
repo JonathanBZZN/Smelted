@@ -47,6 +47,12 @@ class Furnace(StaticObject):
         self.finished = False
         self.burn_time = 0
 
+    def print(self, screen):
+        if self.print_inventory:
+            # Print the item in the inventory
+            self.inventory[0].update(self.rect.x, self.rect.y + self.surf.get_height() / 2, self.surf.get_height(), self.surf.get_width())
+            screen.blit(self.inventory[0].surf, self.inventory[0].rect)
+
     def interact(self, player):
         # First item
         if len(self.inventory) == 0 and player.inventory is not None and player.inventory.smeltable:
@@ -90,6 +96,7 @@ class Furnace(StaticObject):
         elif player.inventory is None and self.finished:
             # Player taking output from furnace
             self.finished = False
+            self.print_inventory = False
             player.inventory = self.inventory[0]
             self.inventory_type = None
             self.inventory = []
@@ -119,6 +126,7 @@ class Furnace(StaticObject):
                 self.finished = True
                 # Reset furnace color
                 self.surf = self.idle
+                self.print_inventory = True
 
 
 class Hammer(StaticObject):
