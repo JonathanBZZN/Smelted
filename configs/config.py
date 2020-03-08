@@ -25,7 +25,7 @@ PLAYER_2_CONFIG = {
     "SPEED": 10
 }
 
-MAP_1 = {
+MAP_2 = {
     "PLAYER_1_POS": (100, 100),
     "PLAYER_2_POS": (100, 200),
 
@@ -41,7 +41,9 @@ MAP_1 = {
     "TIME_LIMIT": 60*20,
 }
 
-MAPS = [MAP_1]
+MAP_2["OBJECTS"].extend([(Wall, (1100, x)) for x in range(0, 900, 50)])
+
+MAPS = [MAP_2]
 
 END_POINTS = {
     Iron: (2000, 100, 10),
