@@ -46,10 +46,12 @@ class Furnace(StaticObject):
 
     def interact(self, player):
         if self.inventory is None and player.inventory is not None and player.inventory.smeltable:
+
             # Add item in players inventory to the furnace
             self.inventory = player.inventory
             player.inventory = None
 
+            # Play sounds effect
             self.effect.play()
 
             # Now check if the items match inputs to a recipe
