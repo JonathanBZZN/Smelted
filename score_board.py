@@ -137,6 +137,8 @@ class EndPoint(StaticObject):
 
         self.surf = self.idle
 
+        self.effect = pygame.mixer.Sound("Sounds/NomNomNom.wav")
+
         self.counter = 0
 
     def interact(self, player):
@@ -147,6 +149,7 @@ class EndPoint(StaticObject):
             for item in self.score_board.order_list:
                 if isinstance(player.inventory, item.object):
                     # Completed goal so add score and remove item from order
+                    self.effect.play()
                     self.surf = self.active
                     self.counter = 20
                     player.inventory = None
