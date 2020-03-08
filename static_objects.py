@@ -36,6 +36,7 @@ class Furnace(StaticObject):
         self.work.set_colorkey((0, 255, 0), RLEACCEL)
 
         self.surf = self.idle
+        self.effect = pygame.mixer.Sound("Sounds/Fire.wav")
 
         # Set furnace attributes
         self.inventory = None
@@ -48,6 +49,8 @@ class Furnace(StaticObject):
             # Add item in players inventory to the furnace
             self.inventory = player.inventory
             player.inventory = None
+
+            self.effect.play()
 
             # Now check if the items match inputs to a recipe
             for recipe in SMELT_RECIPES:
@@ -87,6 +90,7 @@ class Hammer(StaticObject):
         super(Hammer, self).__init__(x_pos, y_pos, width, height, 15)
         self.hammer_time = 0
         self.current_recipe = None
+        self.effect = pygame.mixer.Sound("Sounds/AnvilHit.wav")
 
         # Set hammer image
         self.idle = pygame.transform.scale(pygame.image.load("Sprites/anvil-idle.png"), (width, height))
@@ -102,6 +106,7 @@ class Hammer(StaticObject):
     def interact(self, player):
         if self.current_recipe is None and player.inventory is not None and player.inventory.hammerable:
             # Player has an item which can be hammered
+            self.effect.play()
             for recipe in HAMMER_RECIPES:
                 if isinstance(player.inventory, HAMMER_RECIPES[recipe][0]):
                     # Start hammering
@@ -133,6 +138,7 @@ class Table(StaticObject):
         self.surf = pygame.transform.scale(pygame.image.load("Sprites/table.png"), (width, height))
         self.surf = self.surf.convert()
         self.surf.set_colorkey((0, 255, 0), RLEACCEL)
+        self.effect = pygame.mixer.Sound("Sounds/Table.wav")
 
     def interact(self, player):
         if self.interact_cooldown != 0:
@@ -140,11 +146,13 @@ class Table(StaticObject):
             return
 
         if player.inventory is not None and self.inventory is None:
+            self.effect.play()
             self.inventory = player.inventory
             player.inventory = None
             player.interacted = True
             self.interact_cooldown = 10
         elif player.inventory is None and self.inventory is not None:
+            self.effect.play()
             player.inventory = self.inventory
             player.interacted = True
             self.inventory = None
@@ -162,6 +170,7 @@ class Grinder(StaticObject):
         super(Grinder, self).__init__(x_pos, y_pos, width, height, 15)
         self.grind_time = 0
         self.current_recipe = None
+        self.effect = pygame.mixer.Sound("Sounds/GrindGrindGrind.wav")
 
         # Set grinder images
         self.idle = pygame.transform.scale(pygame.image.load("Sprites/grinder-idle.png"), (width, height))
@@ -178,6 +187,7 @@ class Grinder(StaticObject):
 
         if self.current_recipe is None and player.inventory is not None and player.inventory.grindable:
             # Player has an item to grind
+            self.effect.play()
             for recipe in GRINDER_RECIPES:
                 if isinstance(player.inventory, GRINDER_RECIPES[recipe][0]):
                     self.grind_time = GRINDER_RECIPES[recipe][1]
@@ -224,8 +234,10 @@ class Bin(StaticObject):
     def __init__(self, x_pos, y_pos, width=50, height=50):
         super(Bin, self).__init__(x_pos, y_pos, width, height, 15)
         self.surf.fill((0, 0, 0))
+        self.effect = pygame.mixer.Sound("Sounds/NomNomNom.wav")
 
     def interact(self, player):
+        self.effect.play()
         player.inventory = None
 
 
