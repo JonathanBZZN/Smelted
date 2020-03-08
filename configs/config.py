@@ -2,7 +2,6 @@ from static_objects import *
 
 SCREEN_WIDTH = 1600
 SCREEN_HEIGHT = 900
-DIFFICULTY = 0.995
 
 BACKGROUND_COLOUR = (255, 255, 255)
 
@@ -31,11 +30,18 @@ MAP_1 = {
     "PLAYER_2_POS": (100, 200),
 
     "OBJECTS": [
-
+        (Furnace, (400, 350, 225, 200)),
+        (CollectionPoint, (Iron, 100, 400))
     ],
 
-    "SUBMIT_POS": (300, 300),
-    "TIME_LIMIT": 60*20,
+    "SUBMIT_POS": (900, 350),
+    "TIME_LIMIT": 60*30,
+
+    "END_POINTS": {
+        Steel: (1000, 200, 10),
+    },
+
+    "DIFFICULTY": 0.999
 }
 
 MAP_2 = {
@@ -57,6 +63,14 @@ MAP_2 = {
 
     "SUBMIT_POS": (900, 110),
     "TIME_LIMIT": 60*60,
+
+    "END_POINTS": {
+        Steel: (1000, 200, 10),
+        BasicSword: (2000, 400, 100),
+        SharpBasicSword: (2500, 500, 200)
+    },
+
+    "DIFFICULTY": 0.99
 }
 
 MAP_2["OBJECTS"].extend([(Wall, (0, x)) for x in range(0, 900, 100)])
@@ -66,10 +80,4 @@ MAP_2["OBJECTS"].extend([(Wall, (550, 0 + x)) for x in range(0, 300, 100)])
 MAP_2["OBJECTS"].extend([(Wall, (0 + x, 800)) for x in range(0, 1200, 100)])
 MAP_2["OBJECTS"].extend([(Wall, (0 + x, 0)) for x in range(0, 1200, 100)])
 
-MAPS = [MAP_2]
-
-END_POINTS = {
-    Steel: (1000, 200, 10),
-    BasicSword: (2000, 400, 100),
-    SharpBasicSword: (2500, 500, 200)
-}
+MAPS = [MAP_1, MAP_2]

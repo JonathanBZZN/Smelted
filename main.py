@@ -167,6 +167,8 @@ def load_map(map, all_sprites):
 
     # Add score board
     score = ScoreBoard()
+    score.end_points = map["END_POINTS"]
+    score.difficulty = map["DIFFICULTY"]
     all_sprites.add(score)
 
     # Add the submit object
