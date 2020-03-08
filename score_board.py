@@ -16,6 +16,7 @@ class ScoreBoard(StaticObject):
 
         # Score board attributes
         self.score = 0
+        self.difficulty = 0
         self.set_score()
         self.order_list = []
         self.end_points = None
@@ -47,7 +48,7 @@ class ScoreBoard(StaticObject):
             self.add_item()
         elif len(self.order_list) < 10:
             # Use randomness to add item
-            if random.random() > DIFFICULTY:
+            if random.random() > self.difficulty:
                 self.add_item()
 
     def update_times(self):
@@ -112,7 +113,7 @@ def DrawBar(pos, size, border_c, progress, screen):
     elif progress < 0.75:
         bar_c = (128, 128, 0)
 
-    # Draw the progess bar
+    # Draw the progress bar
     pygame.draw.rect(screen, border_c, (*pos, *size), 5)
     inner_pos = (pos[0]+3, pos[1]+3)
     inner_size = ((size[0]-6) * progress, size[1]-6)

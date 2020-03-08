@@ -2,7 +2,6 @@ from static_objects import *
 
 SCREEN_WIDTH = 1600
 SCREEN_HEIGHT = 900
-DIFFICULTY = 0.995
 
 BACKGROUND_COLOUR = (255, 255, 255)
 
@@ -39,7 +38,9 @@ MAP_1 = {
 
     "END_POINTS": {
         Steel: (1000, 200, 10),
-    }
+    },
+
+    "DIFFICULTY": 0.999
 }
 
 MAP_2 = {
@@ -64,7 +65,9 @@ MAP_2 = {
         Steel: (1000, 200, 10),
         BasicSword: (2000, 400, 100),
         SharpBasicSword: (2500, 500, 200)
-    }
+    },
+
+    "DIFFICULTY": 0.99
 }
 
 MAP_2["OBJECTS"].extend([(Wall, (0, x)) for x in range(0, 900, 100)])
