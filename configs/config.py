@@ -152,7 +152,7 @@ MAP_3["OBJECTS"].extend([(Wall, (200, x)) for x in range(400, 800, 100)])
 MAP_3["OBJECTS"].extend([(Wall, (0 + x, 800)) for x in range(0, 1200, 100)])
 MAP_3["OBJECTS"].extend([(Wall, (0 + x, 0)) for x in range(0, 1200, 100)])
 
-
+99
 # ********* MAP SUPER GRAHAM ********** #
 MAP_SG = {
     "PLAYERS": 3,
@@ -193,4 +193,4 @@ MAP_SG["OBJECTS"].extend([(Wall, (550, 0 + x)) for x in range(0, 300, 100)])
 MAP_SG["OBJECTS"].extend([(Wall, (0 + x, 800)) for x in range(0, 1200, 100)])
 MAP_SG["OBJECTS"].extend([(Wall, (0 + x, 0)) for x in range(0, 1200, 100)])
 
-MAPS = [MAP_SG]
+MAPS = [MAP_1, MAP_2, MAP_3, MAP_SG]
