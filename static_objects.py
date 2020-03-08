@@ -200,6 +200,7 @@ class Table(StaticObject):
     def print(self, screen):
         if self.inventory is not None:
             self.inventory.update(self.rect.x, self.rect.y + self.surf.get_height() / 2, self.surf.get_height(), self.surf.get_width())
+            self.inventory.rect.move_ip(0, 20)
             screen.blit(self.inventory.surf, self.inventory.rect)
 
 
@@ -272,7 +273,9 @@ class Bin(StaticObject):
 
     def __init__(self, x_pos, y_pos, width=50, height=50):
         super(Bin, self).__init__(x_pos, y_pos, width, height, 15)
-        self.surf.fill((0, 0, 0))
+        self.surf = pygame.transform.scale(pygame.image.load("Sprites/bin.png"), (width, height))
+        self.surf = self.surf.convert()
+        self.surf.set_colorkey((0, 255, 0), RLEACCEL)
         self.effect = pygame.mixer.Sound("Sounds/NomNomNom.wav")
 
     def interact(self, player):

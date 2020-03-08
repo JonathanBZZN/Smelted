@@ -99,7 +99,7 @@ def game_intro():
 
 
 def introPage():
-    infoAsset = pygame.image.load("Sprites/tempBG.png")
+    infoAsset = pygame.image.load("Sprites/infopg.png")
     done = False
     while not done:
         screen.blit(infoAsset, (0, 0))

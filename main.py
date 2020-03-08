@@ -42,7 +42,7 @@ def run_map(map, screen):
 
     # Load map
     all_sprites = pygame.sprite.Group()
-    player1, player2, score, update = load_map(map, all_sprites)
+    players, score, update = load_map(map, all_sprites)
     score.total_time = map_time
 
     # init game clock
@@ -80,8 +80,8 @@ def run_map(map, screen):
 
         # Update players
         pressed = pygame.key.get_pressed()
-        player1.update(pressed, all_sprites)
-        player2.update(pressed, all_sprites)
+        for player in players:
+            player.update(pressed, all_sprites)
 
         # Update all objects that need to be updated
         for entity in update:
@@ -158,15 +158,23 @@ def run_continue(screen, check):
 
 def load_map(map, all_sprites):
     # First load in the player 1 and  2 position
-    player1 = Player(PLAYER_1_CONFIG, map["PLAYER_1_POS"][0], map["PLAYER_1_POS"][1])
-    player2 = Player(PLAYER_2_CONFIG, map["PLAYER_2_POS"][0], map["PLAYER_2_POS"][1])
+    #player1 = Player(PLAYER_1_CONFIG, map["PLAYER_1_POS"][0], map["PLAYER_1_POS"][1])
+    #player2 = Player(PLAYER_2_CONFIG, map["PLAYER_2_POS"][0], map["PLAYER_2_POS"][1])
+    players = []
 
-    # Update all_sprites to contain both players
-    all_sprites.add(player1)
-    all_sprites.add(player2)
+    for i in range(1, map["PLAYERS"] + 1):
+        # Create the player object
+        player_str = "PLAYER_" + str(i) + "_"
+        player = Player(PLAYER_CONFIGS[player_str+"CONFIG"], map[player_str+"POS"][0], map[player_str+"POS"][1])
+
+        # Load the player into the game
+        players.append(player)
+        all_sprites.add(player)
 
     # Add score board
     score = ScoreBoard()
+    score.end_points = map["END_POINTS"]
+    score.difficulty = map["DIFFICULTY"]
     all_sprites.add(score)
 
     # Add the submit object
@@ -186,4 +194,4 @@ def load_map(map, all_sprites):
         if isinstance(item_instance, Furnace):
             update.append(item_instance)
 
-    return player1, player2, score, update
+    return players, score, update
