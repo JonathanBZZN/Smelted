@@ -37,6 +37,7 @@ PLAYER_CONFIGS = {
     }
 }
 
+# ********** MAP 1 ********** #
 MAP_1 = {
     "PLAYER_1_POS": (100, 200),
     "PLAYER_2_POS": (100, 600),
@@ -68,6 +69,8 @@ MAP_1["OBJECTS"].extend([(Wall, (0 + x, 0)) for x in range(0, 1200, 100)])
 MAP_1["OBJECTS"].extend([(Wall, (0 + x, 700)) for x in range(0, 1200, 100)])
 MAP_1["OBJECTS"].extend([(Wall, (0 + x, 100)) for x in range(0, 1200, 100)])
 
+
+# ************ MAP 2 ********** #
 MAP_2 = {
     "PLAYERS": 2,
 
@@ -106,4 +109,44 @@ MAP_2["OBJECTS"].extend([(Wall, (550, 0 + x)) for x in range(0, 300, 100)])
 MAP_2["OBJECTS"].extend([(Wall, (0 + x, 800)) for x in range(0, 1200, 100)])
 MAP_2["OBJECTS"].extend([(Wall, (0 + x, 0)) for x in range(0, 1200, 100)])
 
-MAPS = [MAP_1, MAP_2]
+# ********* MAP SUPER GRAHAM ********** #
+MAP_SG = {
+    "PLAYERS": 3,
+
+    "PLAYER_1_POS": (275, 450),
+    "PLAYER_2_POS": (775, 450),
+    "PLAYER_3_POS": (775, 100),
+
+    "OBJECTS": [
+        (Table, (550,300, 100, 100)),
+        (Table, (550,400, 100, 100)),
+        (Table, (550,500, 100, 100)),
+        (Furnace, (100,100, 225, 200)),
+        (Furnace, (325,100, 225, 200)),
+        (Grinder, (875, 600, 225, 200)),
+        (Hammer, (650, 600, 225, 200)),
+        (CollectionPoint, (Iron, 250, 700)),
+        (CollectionPoint, (PlatIngot, 150, 700)),
+        (Bin, (150, 450, 100, 100))
+    ],
+
+    "SUBMIT_POS": (900, 110),
+    "TIME_LIMIT": 60*60,
+
+    "END_POINTS": {
+        BasicSword: (2000, 400, 100),
+        SharpBasicSword: (2500, 500, 200),
+        SharpPlatSword: (3000, 750, 400)
+    },
+
+    "DIFFICULTY": 0.99
+}
+
+MAP_SG["OBJECTS"].extend([(Wall, (0, x)) for x in range(0, 900, 100)])
+MAP_SG["OBJECTS"].extend([(Wall, (1100, x)) for x in range(0, 900, 100)])
+MAP_SG["OBJECTS"].extend([(Wall, (550, 600 + x)) for x in range(0, 300, 100)])
+MAP_SG["OBJECTS"].extend([(Wall, (550, 0 + x)) for x in range(0, 300, 100)])
+MAP_SG["OBJECTS"].extend([(Wall, (0 + x, 800)) for x in range(0, 1200, 100)])
+MAP_SG["OBJECTS"].extend([(Wall, (0 + x, 0)) for x in range(0, 1200, 100)])
+
+MAPS = [MAP_1, MAP_2, MAP_SG]
