@@ -26,8 +26,8 @@ PLAYER_2_CONFIG = {
 }
 
 MAP_1 = {
-    "PLAYER_1_POS": (100, 100),
-    "PLAYER_2_POS": (100, 200),
+    "PLAYER_1_POS": (100, 200),
+    "PLAYER_2_POS": (100, 700),
 
     "OBJECTS": [
         (Furnace, (400, 350, 225, 200)),
