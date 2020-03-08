@@ -111,6 +111,8 @@ MAP_2["OBJECTS"].extend([(Wall, (0 + x, 0)) for x in range(0, 1200, 100)])
 
 # ********* MAP 3 ********** #
 MAP_3 = {
+    "PLAYERS": 2,
+
     "PLAYER_1_POS": (100, 450),
     "PLAYER_2_POS": (550, 500),
 
@@ -127,16 +129,17 @@ MAP_3 = {
         (Grinder, (740, 600, 150, 150)),
         (Hammer, (310, 600, 150, 150)),
         (CollectionPoint, (Iron, 480, 150)),
-        (CollectionPoint, (PlatIngot, 650, 150))
+        (CollectionPoint, (GoldIngot, 650, 150))
     ],
 
     "SUBMIT_POS": (900, 110),
     "TIME_LIMIT": 60*60,
 
     "END_POINTS": {
-        Steel: (1000, 200, 10),
         BasicSword: (2000, 400, 100),
-        SharpBasicSword: (2500, 500, 200)
+        SharpBasicSword: (2500, 500, 200),
+        SharpGoldSword: (3000, 700, 400),
+        SteelShield: (3000, 800, 400)
     },
 
     "DIFFICULTY": 0.99
@@ -190,4 +193,4 @@ MAP_SG["OBJECTS"].extend([(Wall, (550, 0 + x)) for x in range(0, 300, 100)])
 MAP_SG["OBJECTS"].extend([(Wall, (0 + x, 800)) for x in range(0, 1200, 100)])
 MAP_SG["OBJECTS"].extend([(Wall, (0 + x, 0)) for x in range(0, 1200, 100)])
 
-MAPS = [ MAP_2, MAP_3, MAP_SG]
+MAPS = [MAP_1, MAP_2, MAP_3, MAP_SG]
