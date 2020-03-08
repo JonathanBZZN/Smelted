@@ -2,7 +2,8 @@ from items import *
 from swords import *
 
 SMELT_RECIPES = {
-    Steel: (Iron, 120)
+    Steel: ([Iron], 200),
+    BigSteel: ([Iron, Iron], 150)
 }
 
 HAMMER_RECIPES = {
