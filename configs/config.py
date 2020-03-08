@@ -83,16 +83,17 @@ MAP_2 = {
         (Grinder, (875, 600, 225, 200)),
         (Hammer, (650, 600, 225, 200)),
         (CollectionPoint, (Iron, 250, 700)),
-        (CollectionPoint, (PlatIngot, 150, 700))
+        (CollectionPoint, (PlatIngot, 150, 700)),
+        (Bin, (150, 450, 100, 100))
     ],
 
     "SUBMIT_POS": (900, 110),
     "TIME_LIMIT": 60*60,
 
     "END_POINTS": {
-        Steel: (1000, 200, 10),
         BasicSword: (2000, 400, 100),
-        SharpBasicSword: (2500, 500, 200)
+        SharpBasicSword: (2500, 500, 200),
+        SharpPlatSword: (3000, 750, 400)
     },
 
     "DIFFICULTY": 0.99
