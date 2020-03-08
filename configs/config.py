@@ -27,10 +27,10 @@ PLAYER_CONFIGS = {
     },
 
     "PLAYER_3_CONFIG": {
-        "UP": pygame.K_w,
-        "DOWN": pygame.K_DOWN,
-        "LEFT": pygame.K_d,
-        "RIGHT": pygame.K_LEFT,
+        "UP": pygame.K_s,
+        "DOWN": pygame.K_RIGHT,
+        "LEFT": pygame.K_UP,
+        "RIGHT": pygame.K_a,
         "USE": pygame.K_SPACE,
         "IMG": "Sprites/graham-3.png",
         "SPEED": 10
@@ -68,11 +68,10 @@ MAP_1["OBJECTS"].extend([(Wall, (0 + x, 700)) for x in range(0, 1200, 100)])
 MAP_1["OBJECTS"].extend([(Wall, (0 + x, 100)) for x in range(0, 1200, 100)])
 
 MAP_2 = {
-    "PLAYERS": 3,
+    "PLAYERS": 2,
 
     "PLAYER_1_POS": (275, 450),
     "PLAYER_2_POS": (775, 450),
-    "PLAYER_3_POS": (310, 450),
 
     "OBJECTS": [
         (Table, (550,300, 100, 100)),
