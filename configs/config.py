@@ -5,29 +5,43 @@ SCREEN_HEIGHT = 900
 
 BACKGROUND_COLOUR = (255, 255, 255)
 
-PLAYER_1_CONFIG = {
-    "UP": pygame.K_UP,
-    "DOWN": pygame.K_DOWN,
-    "LEFT": pygame.K_LEFT,
-    "RIGHT": pygame.K_RIGHT,
-    "USE": pygame.K_RCTRL,
-    "IMG": "Sprites/graham-1.png",
-    "SPEED": 10
-}
+PLAYER_CONFIGS = {
+    "PLAYER_1_CONFIG": {
+        "UP": pygame.K_UP,
+        "DOWN": pygame.K_DOWN,
+        "LEFT": pygame.K_LEFT,
+        "RIGHT": pygame.K_RIGHT,
+        "USE": pygame.K_RCTRL,
+        "IMG": "Sprites/graham-1.png",
+        "SPEED": 10
+    },
 
-PLAYER_2_CONFIG = {
-    "UP": pygame.K_w,
-    "DOWN": pygame.K_s,
-    "LEFT": pygame.K_a,
-    "RIGHT": pygame.K_d,
-    "USE": pygame.K_LSHIFT,
-    "IMG": "Sprites/graham-2.png",
-    "SPEED": 10
+    "PLAYER_2_CONFIG": {
+        "UP": pygame.K_w,
+        "DOWN": pygame.K_s,
+        "LEFT": pygame.K_a,
+        "RIGHT": pygame.K_d,
+        "USE": pygame.K_LSHIFT,
+        "IMG": "Sprites/graham-2.png",
+        "SPEED": 10
+    },
+
+    "PLAYER_3_CONFIG": {
+        "UP": pygame.K_w,
+        "DOWN": pygame.K_DOWN,
+        "LEFT": pygame.K_d,
+        "RIGHT": pygame.K_LEFT,
+        "USE": pygame.K_SPACE,
+        "IMG": "Sprites/graham-3.png",
+        "SPEED": 10
+    }
 }
 
 MAP_1 = {
     "PLAYER_1_POS": (100, 200),
     "PLAYER_2_POS": (100, 600),
+
+    "PLAYERS": 2,
 
     "OBJECTS": [
         (Furnace, (400, 350, 225, 200)),
@@ -54,8 +68,11 @@ MAP_1["OBJECTS"].extend([(Wall, (0 + x, 700)) for x in range(0, 1200, 100)])
 MAP_1["OBJECTS"].extend([(Wall, (0 + x, 100)) for x in range(0, 1200, 100)])
 
 MAP_2 = {
+    "PLAYERS": 3,
+
     "PLAYER_1_POS": (275, 450),
     "PLAYER_2_POS": (775, 450),
+    "PLAYER_3_POS": (310, 450),
 
     "OBJECTS": [
         (Table, (550,300, 100, 100)),
