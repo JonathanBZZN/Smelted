@@ -54,7 +54,8 @@ MAP_2 = {
         (Furnace, (325,100, 225, 200)),
         (Grinder, (875, 600, 225, 200)),
         (Hammer, (650, 600, 225, 200)),
-        (CollectionPoint, (Iron, 250, 700))
+        (CollectionPoint, (Iron, 250, 700)),
+        (CollectionPoint, (PlatIngot, 150, 700))
     ],
 
     "SUBMIT_POS": (900, 110),
@@ -68,7 +69,7 @@ MAP_2["OBJECTS"].extend([(Wall, (550, 0 + x)) for x in range(0, 300, 100)])
 MAP_2["OBJECTS"].extend([(Wall, (0 + x, 800)) for x in range(0, 1200, 100)])
 MAP_2["OBJECTS"].extend([(Wall, (0 + x, 0)) for x in range(0, 1200, 100)])
 
-MAPS = [MAP_1, MAP_2]
+MAPS = [MAP_2]
 
 END_POINTS = {
     Steel: (1000, 200, 10),
