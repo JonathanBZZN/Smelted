@@ -99,7 +99,7 @@ MAP_2 = {
         SharpPlatSword: (3000, 750, 400)
     },
 
-    "DIFFICULTY": 0.99
+    "DIFFICULTY": 0.995
 }
 
 MAP_2["OBJECTS"].extend([(Wall, (0, x)) for x in range(0, 900, 100)])
@@ -183,7 +183,7 @@ MAP_SG = {
         SharpPlatSword: (3000, 750, 400)
     },
 
-    "DIFFICULTY": 0.99
+    "DIFFICULTY": 0.995
 }
 
 MAP_SG["OBJECTS"].extend([(Wall, (0, x)) for x in range(0, 900, 100)])
@@ -193,4 +193,4 @@ MAP_SG["OBJECTS"].extend([(Wall, (550, 0 + x)) for x in range(0, 300, 100)])
 MAP_SG["OBJECTS"].extend([(Wall, (0 + x, 800)) for x in range(0, 1200, 100)])
 MAP_SG["OBJECTS"].extend([(Wall, (0 + x, 0)) for x in range(0, 1200, 100)])
 
-MAPS = [MAP_1, MAP_2, MAP_3, MAP_SG]
+MAPS = [MAP_SG]
