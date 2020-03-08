@@ -1,5 +1,6 @@
 from items import *
 from swords import *
+from Shield import SteelShield
 
 SMELT_RECIPES = {
 
@@ -13,7 +14,8 @@ SMELT_RECIPES = {
 HAMMER_RECIPES = {
     BasicSword: (Steel, 60),
     GoldSword: (HotGold, 80),
-    PlatSword: (HotPlat, 100)
+    PlatSword: (HotPlat, 100),
+    SteelShield: (BigSteel, 100)
 }
 
 GRINDER_RECIPES = {
