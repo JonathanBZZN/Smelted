@@ -1,3 +1,5 @@
+import copy
+
 from configs.recipes import *
 
 
@@ -39,16 +41,19 @@ class Furnace(StaticObject):
         self.effect = pygame.mixer.Sound("Sounds/Fire.wav")
 
         # Set furnace attributes
-        self.inventory = None
+        self.inventory = []
+        self.inventory_type = None
         self.current_smelt = None
         self.finished = False
         self.burn_time = 0
 
     def interact(self, player):
-        if self.inventory is None and player.inventory is not None and player.inventory.smeltable:
+        # First item
+        if len(self.inventory) == 0 and player.inventory is not None and player.inventory.smeltable:
 
             # Add item in players inventory to the furnace
-            self.inventory = player.inventory
+            self.inventory.append(player.inventory)
+            self.inventory_type = player.inventory
             player.inventory = None
 
             # Play sounds effect
@@ -56,8 +61,10 @@ class Furnace(StaticObject):
 
             # Now check if the items match inputs to a recipe
             for recipe in SMELT_RECIPES:
-                if isinstance(self.inventory, SMELT_RECIPES[recipe][0]) and self.current_smelt is None:
+                if isinstance(self.inventory[0], SMELT_RECIPES[recipe][0][0]) and \
+                        len(self.inventory) == len(SMELT_RECIPES[recipe][0]) and self.current_smelt is None:
                     # Start smelting
+
                     self.burn_time = SMELT_RECIPES[recipe][1]
                     self.current_smelt = recipe
                     break
@@ -65,21 +72,51 @@ class Furnace(StaticObject):
             # Update sprite
             self.surf = self.work
 
+        elif self.current_smelt is not None and isinstance(player.inventory, type(self.inventory_type)):
+
+
+
+            # Adding to an already smelting furnace only if it is a recipe
+            for recipe in SMELT_RECIPES:
+                self.inventory.append(player.inventory)
+                print(str(self.inventory[0]), str(SMELT_RECIPES[recipe][0][0]))
+                print(self.compare_inventory(self.inventory,SMELT_RECIPES[recipe][0] ))
+                if self.compare_inventory(self.inventory, SMELT_RECIPES[recipe][0]):
+                    # Add item in players inventory to the furnace
+                    player.inventory = None
+                    self.burn_time = SMELT_RECIPES[recipe][1]
+                    self.current_smelt = recipe
+                else:
+                    del self.inventory[-1]
+
         elif player.inventory is None and self.finished:
             # Player taking output from furnace
             self.finished = False
-            player.inventory = self.inventory
-            self.inventory = None
+            player.inventory = self.inventory[0]
+            self.inventory_type = None
+            self.inventory = []
+
+    def compare_inventory(self, inventory, recipe):
+        if len(inventory) != len(recipe):
+            return False
+
+        for i in range(len(inventory)):
+            if str(inventory[i]) != recipe[i].__name__:
+                return False
+
+        return True
 
     def update(self):
         # Check if there is a current recipe
+
         if self.current_smelt is not None:
             if self.burn_time > 0:
                 # Reduce burn time
                 self.burn_time -= 1
             elif self.burn_time == 0:
                 # Produce output and reset furnace
-                self.inventory = self.current_smelt()  # Inventory = a new object, which is output of smelt
+                self.inventory = []
+                self.inventory.append(self.current_smelt())  # Inventory = a new object, which is output of smelt
                 self.current_smelt = None
                 self.finished = True
                 # Reset furnace color
