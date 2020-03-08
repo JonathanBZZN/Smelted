@@ -158,8 +158,6 @@ def run_continue(screen, check):
 
 def load_map(map, all_sprites):
     # First load in the player 1 and  2 position
-    #player1 = Player(PLAYER_1_CONFIG, map["PLAYER_1_POS"][0], map["PLAYER_1_POS"][1])
-    #player2 = Player(PLAYER_2_CONFIG, map["PLAYER_2_POS"][0], map["PLAYER_2_POS"][1])
     players = []
 
     for i in range(1, map["PLAYERS"] + 1):
