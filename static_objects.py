@@ -163,6 +163,7 @@ class Table(StaticObject):
     def print(self, screen):
         if self.inventory is not None:
             self.inventory.update(self.rect.x, self.rect.y + self.surf.get_height() / 2, self.surf.get_height(), self.surf.get_width())
+            self.inventory.rect.move_ip(0, 20)
             screen.blit(self.inventory.surf, self.inventory.rect)
 
 
