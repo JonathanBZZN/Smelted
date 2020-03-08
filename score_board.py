@@ -16,7 +16,7 @@ class ScoreBoard(StaticObject):
 
         # Score board attributes
         self.score = 0
-        self.difficulty = 0
+        self.difficulty = 0.99
         self.set_score()
         self.order_list = []
         self.end_points = None
