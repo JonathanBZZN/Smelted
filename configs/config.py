@@ -106,4 +106,43 @@ MAP_2["OBJECTS"].extend([(Wall, (550, 0 + x)) for x in range(0, 300, 100)])
 MAP_2["OBJECTS"].extend([(Wall, (0 + x, 800)) for x in range(0, 1200, 100)])
 MAP_2["OBJECTS"].extend([(Wall, (0 + x, 0)) for x in range(0, 1200, 100)])
 
-MAPS = [MAP_1, MAP_2]
+MAP_3 = {
+    "PLAYER_1_POS": (100, 450),
+    "PLAYER_2_POS": (550, 500),
+
+    "OBJECTS": [
+        (Table, (300,400, 100, 100)),
+        (Table, (400,400, 100, 100)),
+        (Table, (500,400, 100, 100)),
+        (Table, (600,400, 100, 100)),
+        (Table, (700,400, 100, 100)),
+        (Table, (800,400, 100, 100)),
+        # (Table, (550,400, 100, 100)),
+        (Furnace, (100,100, 150, 150)),
+        (Furnace, (280,100, 150, 150)),
+        (Grinder, (740, 600, 150, 150)),
+        (Hammer, (310, 600, 150, 150)),
+        (CollectionPoint, (Iron, 480, 150)),
+        (CollectionPoint, (PlatIngot, 650, 150))
+    ],
+
+    "SUBMIT_POS": (900, 110),
+    "TIME_LIMIT": 60*60,
+
+    "END_POINTS": {
+        Steel: (1000, 200, 10),
+        BasicSword: (2000, 400, 100),
+        SharpBasicSword: (2500, 500, 200)
+    },
+
+    "DIFFICULTY": 0.99
+}
+
+MAP_3["OBJECTS"].extend([(Wall, (0, x)) for x in range(0, 900, 100)])
+MAP_3["OBJECTS"].extend([(Wall, (1100, x)) for x in range(0, 900, 100)])
+MAP_3["OBJECTS"].extend([(Wall, (900, x)) for x in range(400, 800, 100)])
+MAP_3["OBJECTS"].extend([(Wall, (200, x)) for x in range(400, 800, 100)])
+MAP_3["OBJECTS"].extend([(Wall, (0 + x, 800)) for x in range(0, 1200, 100)])
+MAP_3["OBJECTS"].extend([(Wall, (0 + x, 0)) for x in range(0, 1200, 100)])
+
+MAPS = [MAP_1, MAP_2, MAP_3]
