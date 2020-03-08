@@ -79,8 +79,6 @@ class Furnace(StaticObject):
             # Adding to an already smelting furnace only if it is a recipe
             for recipe in SMELT_RECIPES:
                 self.inventory.append(player.inventory)
-                print(str(self.inventory[0]), str(SMELT_RECIPES[recipe][0][0]))
-                print(self.compare_inventory(self.inventory,SMELT_RECIPES[recipe][0] ))
                 if self.compare_inventory(self.inventory, SMELT_RECIPES[recipe][0]):
                     # Add item in players inventory to the furnace
                     player.inventory = None
